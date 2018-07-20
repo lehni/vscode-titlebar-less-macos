@@ -1,6 +1,6 @@
 {
   "name": "vscode-titlebar-less-macos",
-  "displayName": "vscode-titlebar-less-macos",
+  "displayName": "Titlebar-Less VSCode on macOS",
   "description": "An extension for a titlebar-less VSCode on macOS",
   "icon": "resources/logo.png",
   "version": "1.0.1",
@@ -25,7 +25,8 @@
     "vscode",
     "vsc",
     "extension",
-    "titlebar"
+    "titlebar",
+    "macos"
   ],
   "categories": [
     "Other"
