@@ -35,7 +35,18 @@ Titlebar-Less: Disable // Disable titlebar-less mode on macOS (restores core fil
 After executing either of these commands, you need to fully restart VSCode in
 order to see the extension's effect. Simply reloading the window is not enough.
 
-## Before/After
+## Required User Settings
+
+This extension only works with the following User Settings. In order to change
+them, choose `Code` > `Preferences` > `Settings` in the menu, and add / change
+these lines:
+
+```json
+  "window.titleBarStyle": "custom",
+  "window.nativeTabs": false,
+ ```
+
+## Befor / After
 
 ![Before/After](https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/before-after.png)
 
