@@ -30,6 +30,13 @@ const patches = {
   ]
 }
 
+const messages = {
+  enabled: 'Titlebar-less mode enabled. Please restart VSCode to see effect.',
+  disabled: 'Titlebar-less mode disabled. Please restart VSCode to see effect.',
+  failedToEnable: details => `Unable to apply all patches (${details})`,
+  failedToDisable: details => `Unable to remove all patches (${details})`
+}
+
 exports.activate = function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand('titlebarLess.enable', enable),
@@ -40,16 +47,16 @@ exports.activate = function activate(context) {
 function enable() {
   const { success, details } = applyPatches(true)
   vscode.window.showInformationMessage(success
-    ? 'Titlebar-Less enabled'
-    : `Unable to apply all patches (${details})`
+    ? messages.enabled
+    : messages.failedToEnable(details)
   )
 }
 
 function disable() {
   const { success, details } = applyPatches(false)
   vscode.window.showInformationMessage(success
-    ? 'Titlebar-Less disabled'
-    : `Unable to remove all patches (${details})`
+    ? messages.disabled
+    : messages.failedToDisable(details)
   )
 }
 
