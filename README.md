@@ -4,11 +4,14 @@
   <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/logo.png" alt="Logo">
 </p>
 
-An extension for hiding the titlebar on VSCode for macOS, and inline the traffic lights (= window controls).
+An extension to hide the titlebar on VSCode for macOS, and inline the traffic
+lights (= window controls).
 
 ## Install
 
-Follow the instructions in the [Marketplace](https://marketplace.visualstudio.com/items?itemName=lehni.vscode-titlebar-less-macos), or run the following in the command palette:
+Follow the instructions in the
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=lehni.vscode-titlebar-less-macos),
+or run the following in the command palette:
 
 ```shell
 ext install lehni.vscode-titlebar-less-macos
@@ -29,7 +32,7 @@ Titlebar-Less: Enable // Enable titlebar-less mode on macOS (patches core files)
 Titlebar-Less: Disable // Disable titlebar-less mode on macOS (restores core files)
 ```
 
-After execute either of these commands, you need to fully restart VSCode in
+After executing either of these commands, you need to fully restart VSCode in
 order to see the extension's effect. Simply reloading the window is not enough.
 
 ## Before/After
