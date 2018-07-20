@@ -12,7 +12,7 @@ const patches = {
       '.titleBarStyle="hidden-inset",'
     ]
   ],
-	'vs/workbench/workbench.main.js': [
+  'vs/workbench/workbench.main.js': [
     [
       '.isFullscreen=function(){return this._fullscreen',
       '.isFullscreen=function(){return true; this._fullscreen'
@@ -31,10 +31,10 @@ const patches = {
 }
 
 exports.activate = function activate(context) {
-	context.subscriptions.push(
+  context.subscriptions.push(
     vscode.commands.registerCommand('titlebarLess.enable', enable),
-		vscode.commands.registerCommand('titlebarLess.disable', disable)
-	)
+    vscode.commands.registerCommand('titlebarLess.disable', disable)
+  )
 }
 
 function enable() {
