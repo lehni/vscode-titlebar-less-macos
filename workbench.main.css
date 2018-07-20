@@ -5,7 +5,22 @@
   min-width: 78px;
 }
 
-/* In 1.9 we force fullscreen to remove titlebar */
+/* Move .sidebar title when .activitybar is hidden */
+.monaco-workbench .activitybar[aria-hidden="true"] + .sidebar > .title {
+	margin-left: 78px;
+}
+
+/* Move first .tab when .sidebar is hidden... */
+.monaco-workbench.nosidebar .tabs-container > .tab:first-child {
+	margin-left: 78px;
+}
+
+/* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
+.monaco-workbench .activitybar:not([aria-hidden="true"]) + .sidebar + .editor .tabs-container > .tab:first-child {
+	margin-left: 0;
+}
+
+/* We force fullscreen to remove titlebar */
 .monaco-workbench.fullscreen .activitybar .content .monaco-action-bar.vertical {
   padding-top: 35px; 
 }
