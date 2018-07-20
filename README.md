@@ -1,13 +1,13 @@
 # Titlebar-less VSCode for macOS
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/logo.png" alt="Logo">
+  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/logo.png" alt="Logo" width="80" height="80">
 </p>
 
 An extension to hide the titlebar on VSCode for macOS, and inline the traffic
 lights (= window controls).
 
-## Install
+## Installation
 
 Follow the instructions in the
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=lehni.vscode-titlebar-less-macos),
@@ -46,7 +46,41 @@ these lines:
   "window.nativeTabs": false,
  ```
 
-## Befor / After
+## Disclaimer / A Word of Cation
+
+This extension modifies script files that are part of the core of VSCode, so use
+it at your own risk. If anything goes wrong, you can always reinstall VSCode
+from [code.visualstudio.com](https://code.visualstudio.com/download) without
+loosing any settings or installed extensions.
+
+## Updating Titlebar-Less
+
+Up to version 1.0.2, this extension was using a fragile approach to restore
+previously applied modifications that would only work correctly within the same
+version of the extension. In order to update to newer versions from these early
+versions, you need to first run `Titlebar-Less: Disable` before updating, and
+then run `Titlebar-Less: Enable` after the update.
+
+Newer versions create backup files before modifying the core files, and they can
+be restored at any time. So with these, you can first update the extension, then
+run the commands in this sequence to get to the newer version of the
+modifications:
+
+```
+Titlebar-Less: Disable
+Titlebar-Less: Enable
+```
+
+## Updating VSCode
+
+Note that after any updates to VSCode, this extension needs to be enabled again
+by running: `Titlebar-Less: Enable`, followed by a restart of the full
+application.
+
+NOTE: Do not run `Titlebar-Less: Disable` after such an update, because that may
+actually wrongly restore backups from a previous version of VSCode.
+
+## Before / After
 
 ![Before/After](https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/before-after.png)
 
