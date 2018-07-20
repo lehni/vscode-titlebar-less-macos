@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.0.4
+
+- Add disclaimer and update notes to README.
+
 ## Version 1.0.3
 
 - Improve restoration of patched files when disabling titlebar-less mode.

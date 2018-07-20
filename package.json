@@ -3,7 +3,7 @@
   "displayName": "Titlebar-Less VSCode on macOS",
   "description": "An extension for a titlebar-less VSCode on macOS",
   "icon": "resources/logo.png",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "main": "./extension",
   "publisher": "lehni",
