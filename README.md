@@ -26,7 +26,7 @@ The extension adds 2 new commands to the command palette:
 
 ```js
 Titlebar-Less: Enable // Enable titlebar-less mode on macOS (patches core files)
-Titlebar-Less: Restore // Disable titlebar-less mode on macOS (restores core files)
+Titlebar-Less: Disable // Disable titlebar-less mode on macOS (restores core files)
 ```
 
 After execute either of these commands, you need to fully restart VSCode in
