@@ -29,6 +29,9 @@ Titlebar-Less: Enable // Enable titlebar-less mode on macOS (patches core files)
 Titlebar-Less: Restore // Disable titlebar-less mode on macOS (restores core files)
 ```
 
+After execute either of these commands, you need to fully restart VSCode in
+order to see the extension's effect. Simply reloading the window is not enough.
+
 ## Before/After
 
 ![Before/After](https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/before-after.png)
