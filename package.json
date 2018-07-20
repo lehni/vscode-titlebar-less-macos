@@ -1,0 +1,58 @@
+{
+  "name": "vscode-titlebar-less-macos",
+  "displayName": "vscode-titlebar-less-macos",
+  "description": "An extension for a titlebar-less VSCode on macOS",
+  "icon": "resources/logo.png",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "./extension",
+  "publisher": "lehni",
+  "author": {
+    "name": "Jürg Lehni",
+    "email": "juerg@scratchdisk.com"
+  },
+  "bugs": {
+    "url": "https://github.com/lehni/vscode-titlebar-less-macos/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lehni/vscode-titlebar-less-macos"
+  },
+  "engines": {
+    "vscode": "^1.15.0"
+  },
+  "keywords": [
+    "vscode",
+    "vsc",
+    "extension",
+    "titlebar"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:titlebarLess.enable",
+    "onCommand:titlebarLess.disable"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "titlebarLess.enable",
+        "title": "Titlebar-Less: Enable"
+      },
+      {
+        "command": "titlebarLess.disable",
+        "title": "Titlebar-Less: Disable"
+      }
+    ]
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.43",
+    "@types/mocha": "^2.2.42",
+    "eslint": "^4.11.0",
+    "vscode": "^1.1.6"
+  }
+}
