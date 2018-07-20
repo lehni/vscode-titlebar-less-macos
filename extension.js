@@ -15,7 +15,7 @@ const patches = {
   'vs/workbench/workbench.main.js': [
     [
       '.isFullscreen=function(){return this._fullscreen',
-      '.isFullscreen=function(){return true; this._fullscreen'
+      '.isFullscreen=function(){return true'
     ],
     [
       '"activitybarWidth",{get:function(){return',
@@ -63,13 +63,20 @@ function disable() {
 function applyPatches(enable) {
   let success = 0
   let total = 0
-  for (const [file, filePatches] of Object.entries(patches)) {
-    for (const [find, replace] of filePatches) {
-      if (patch(
-        file,
-        enable ? find : replace,
-        enable ? replace : find
-      )) {
+  for (const [filePath, filePatches] of Object.entries(patches)) {
+    const file = path.join(appDir, ...filePath.split('/'))
+    const orig = `${file}.orig`
+    if (enable) {
+      let backup = true
+      for (const [find, replace] of filePatches) {
+        if (patch(file, backup && orig, find, replace)) {
+          backup = false
+          success++
+        }
+        total++
+      }
+    } else {
+      if (restore(file, orig)) {
         success++
       }
       total++
@@ -81,18 +88,29 @@ function applyPatches(enable) {
   }
 }
 
-function patch(file, find, replace) {
+function patch(file, orig, find, replace) {
   try {
-    const filePath = path.join(appDir, ...file.split('/'))
-    const content = fs.readFileSync(filePath, fsOptions)
-    const replaceStr = replace instanceof RegExp ? '' : replace
-    // Only apply patch if content doesn't already contain the replace str.
-    if (!replaceStr || content.indexOf(replaceStr) === -1) {
-      const patched = content.replace(find, replaceStr)
-      if (patched !== content) {
-        fs.writeFileSync(filePath, patched, fsOptions)
-        return true
+    const content = fs.readFileSync(file, fsOptions)
+    const patched = content.replace(find, replace)
+    if (patched !== content) {
+      if (orig) {
+        fs.renameSync(file, orig)
       }
+      fs.writeFileSync(file, patched, fsOptions)
+      return true
+    }
+  } catch (err) {
+    console.error(err)
+  }
+  return false
+}
+
+function restore(file, orig) {
+  try {
+    if (fs.existsSync(orig)) {
+      fs.unlinkSync(file)
+      fs.renameSync(orig, file)
+      return true
     }
   } catch (err) {
     console.error(err)
