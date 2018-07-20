@@ -1,7 +1,7 @@
 # Titlebar-less VSCode for macOS
 
 <p align="center">
-  <img src="resources/logo.png" alt="Logo">
+  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/logo.png" alt="Logo">
 </p>
 
 An extension for hiding the titlebar on VSCode for macOS, and inline the traffic lights (= window controls).
@@ -31,7 +31,7 @@ Titlebar-Less: Restore // Disable titlebar-less mode on macOS (restores core fil
 
 ## Before/After
 
-![Before/After](resources/before-after.png)
+![Before/After](https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/before-after.png)
 
 ## Inspiration
 
