@@ -56,10 +56,10 @@ these lines:
 
 ## Disclaimer / A Word of Caution
 
-This extension modifies script files that are part of the core of VSCode, so use
-it at your own risk. If anything goes wrong, you can always reinstall VSCode
-from [code.visualstudio.com](https://code.visualstudio.com/download) without
-loosing any settings or installed extensions.
+This extension modifies files that are part of the core of VSCode, so use it at
+your own risk. If anything goes wrong, you can always reinstall VSCode from
+[code.visualstudio.com](https://code.visualstudio.com/download) without loosing
+any settings or installed extensions.
 
 ## Updating Titlebar-Less
 
