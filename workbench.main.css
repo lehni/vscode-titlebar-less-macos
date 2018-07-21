@@ -50,6 +50,10 @@
   width: 100%;
 }
 
+.monaco-workbench.fullscreen .activitybar .content .monaco-action-bar .badge .badge-content {
+   right: 16px;
+}
+
 /* Allow dragging on the .activitybar */
 .monaco-workbench.fullscreen .activitybar {
   -webkit-app-region: drag;
