@@ -1,8 +1,16 @@
 # Change Log
 
+## Version 1.0.6
+
+- Fix dragging on area around traffic lights when activity bar is hidden.
+
+## Version 1.0.5
+
+- Support dragging tab bar in recent versions of VSCode.
+
 ## Version 1.0.4
 
-- Add disclaimer and update notes to README.
+- Add disclaimer and notes about updating extension and VSCode to README.
 
 ## Version 1.0.3
 
@@ -13,12 +21,12 @@
 
 ## Version 1.0.2
 
-- Fix name
+- Fix display name.
 
 ## Version 1.0.1
 
-- Documentation tweaks
+- Documentation tweaks.
 
 ## Version 1.0.0
 
-- Initial release
+- Initial release.

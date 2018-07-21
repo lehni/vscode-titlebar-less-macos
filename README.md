@@ -35,6 +35,14 @@ Titlebar-Less: Disable // Disable titlebar-less mode on macOS (restores core fil
 After executing either of these commands, you need to fully restart VSCode in
 order to see the extension's effect. Simply reloading the window is not enough.
 
+If VSCode complains about it being corrupted after the restart, choose `don't
+show again`.
+
+See [Disclaimer / A Word of Caution](#disclaimer--a-word-of-caution) for
+details.
+
+See [Required User Settings](#required-user-settings), if the title bar doesn't look right after the restart.
+
 ## Required User Settings
 
 This extension only works with the following User Settings. In order to change
@@ -46,12 +54,12 @@ these lines:
   "window.nativeTabs": false,
  ```
 
-## Disclaimer / A Word of Cation
+## Disclaimer / A Word of Caution
 
-This extension modifies script files that are part of the core of VSCode, so use
-it at your own risk. If anything goes wrong, you can always reinstall VSCode
-from [code.visualstudio.com](https://code.visualstudio.com/download) without
-loosing any settings or installed extensions.
+This extension modifies files that are part of the core of VSCode, so use it at
+your own risk. If anything goes wrong, you can always reinstall VSCode from
+[code.visualstudio.com](https://code.visualstudio.com/download) without loosing
+any settings or installed extensions.
 
 ## Updating Titlebar-Less
 
