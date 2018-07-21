@@ -1,58 +1,69 @@
+/**
+ * Stlyes added by vscode-titlebar-less-macos extension
+ * https://marketplace.visualstudio.com/items?itemName=lehni.vscode-titlebar-less-macos
+ */
 
-.monaco-workbench .activitybar,
-.monaco-workbench .activitybar .content {
+/* fullscreen is forced to remove the titlebar, so use .fullscreen as filter */
+
+/* Make .activitybar 78px wide to align with traffic lights */ 
+.monaco-workbench.fullscreen .activitybar,
+.monaco-workbench.fullscreen .activitybar .content {
   width: 78px !important;
   min-width: 78px;
 }
 
-/* Move .sidebar title when .activitybar is hidden */
-.monaco-workbench .activitybar[aria-hidden="true"] + .sidebar > .title {
-	margin-left: 78px;
-}
-
-/* Move first .tab when .sidebar is hidden... */
-.monaco-workbench.nosidebar .tabs-container > .tab:first-child {
-	margin-left: 78px;
-}
-
-/* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
-.monaco-workbench .activitybar:not([aria-hidden="true"]) + .sidebar + .editor .tabs-container > .tab:first-child {
-	margin-left: 0;
-}
-
-/* We force fullscreen to remove titlebar */
+/* Move .activitybar .content down to not be covered by traffic lights */
 .monaco-workbench.fullscreen .activitybar .content .monaco-action-bar.vertical {
   padding-top: 35px; 
 }
 
-.monaco-workbench .activitybar .content .monaco-action-bar .action-label {
+/* Move .sidebar title when .activitybar is hidden */
+.monaco-workbench.fullscreen .activitybar[aria-hidden="true"] + .sidebar > .title {
+	margin-left: 78px;
+}
+
+/* Move first .tab when .sidebar is hidden... */
+.monaco-workbench.fullscreen.nosidebar .tabs-container > .tab:first-child {
+	margin-left: 78px;
+}
+
+/* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
+.monaco-workbench.fullscreen .activitybar:not([aria-hidden="true"]) + .sidebar + .editor .tabs-container > .tab:first-child {
+	margin-left: 0;
+}
+
+.monaco-workbench.fullscreen .activitybar .content .monaco-action-bar .action-label {
   width: auto;
   background-position: center;
 }
 
-.monaco-workbench .activitybar .content .monaco-action-bar .action-item::before {
+.monaco-workbench.fullscreen .activitybar .content .monaco-action-bar .action-item::before {
   width: auto;
   right: 9px;
 }
 
-.monaco-workbench .activitybar .content .monaco-action-bar .badge {
+.monaco-workbench.fullscreen .activitybar .content .monaco-action-bar .badge {
   width: 100%;
 }
 
-.monaco-workbench .activitybar {
-  -webkit-app-region: drag; /* Allow dragging on the wider activitybar */
+/* Allow dragging on the wider activitybar */
+.monaco-workbench.fullscreen .activitybar {
+  -webkit-app-region: drag;
 }
 
-.monaco-workbench .activitybar .content .monaco-action-bar {
-  -webkit-app-region: no-drag; /* Still allow to click actions without dragging though */
+/* Still allow to click actions without dragging though */
+.monaco-workbench.fullscreen .activitybar .content .monaco-action-bar {
+  -webkit-app-region: no-drag;
 }
 
-.monaco-workbench .sidebar .composite.title {
-  -webkit-app-region: drag; /* Allow dragging on part title */
+ /* Allow dragging on part title */
+ .monaco-workbench.fullscreen .sidebar .composite.title {
+  -webkit-app-region: drag;
 }
 
-.monaco-workbench .sidebar .title .title-actions .action-label {
-  -webkit-app-region: no-drag; /* Still allow to click actions without dragging though */
+/* Still allow to click actions without dragging though */
+.monaco-workbench.fullscreen .sidebar .title .title-actions .action-label {
+  -webkit-app-region: no-drag;
 }
 
 /*
@@ -60,12 +71,15 @@
  * See: https://github.com/Microsoft/vscode/commit/bd35d2e15bc2a88aa9ea857cbd6c407d5d225c1a
  * TODO: Remove .one-editor-silo in Fall 2018
  */
-.monaco-workbench .part.editor .content .editor-group-container .title .tabs-container,
-.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container {
-  -webkit-app-region: drag; /* Allow dragging on empty space in tabs */
+
+/* Allow dragging on empty space in tabs */
+.monaco-workbench.fullscreen .part.editor .content .editor-group-container .title .tabs-container,
+.monaco-workbench.fullscreen .part.editor .content .one-editor-silo .container .title .tabs-container {
+  -webkit-app-region: drag;
 }
 
-.monaco-workbench .part.editor .content .editor-group-container .title .tabs-container .tab,
-.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container .tab {
-  -webkit-app-region: no-drag; /* Allow dragging tabs to re-order */
+/* Allow dragging tabs to re-order */
+.monaco-workbench.fullscreen .part.editor .content .editor-group-container .title .tabs-container .tab,
+.monaco-workbench.fullscreen .part.editor .content .one-editor-silo .container .title .tabs-container .tab {
+  -webkit-app-region: no-drag;
 }
