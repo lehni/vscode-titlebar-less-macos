@@ -19,7 +19,7 @@
 
 /* Move .sidebar title when .activitybar is hidden */
 .monaco-workbench.fullscreen .activitybar[aria-hidden="true"] + .sidebar > .title {
-	margin-left: 78px;
+	padding-left: 78px; /* Use padding instead of margin, for dragging, see below */
 }
 
 /* Move first .tab when .sidebar is hidden... */
@@ -46,7 +46,7 @@
   width: 100%;
 }
 
-/* Allow dragging on the wider activitybar */
+/* Allow dragging on the .activitybar */
 .monaco-workbench.fullscreen .activitybar {
   -webkit-app-region: drag;
 }
@@ -56,7 +56,7 @@
   -webkit-app-region: no-drag;
 }
 
- /* Allow dragging on part title */
+ /* Allow dragging on .sidebar title */
  .monaco-workbench.fullscreen .sidebar .composite.title {
   -webkit-app-region: drag;
 }
