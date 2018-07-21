@@ -55,12 +55,17 @@
   -webkit-app-region: no-drag; /* Still allow to click actions without dragging though */
 }
 
-.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container,
-.monaco-workbench .part.editor .content .editor-group-container .title .tabs-container {
+/*
+ * Support both .editor-group-container and .one-editor-silo .container for now.
+ * See: https://github.com/Microsoft/vscode/commit/bd35d2e15bc2a88aa9ea857cbd6c407d5d225c1a
+ * TODO: Remove .one-editor-silo in Fall 2018
+ */
+.monaco-workbench .part.editor .content .editor-group-container .title .tabs-container,
+.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container {
   -webkit-app-region: drag; /* Allow dragging on empty space in tabs */
 }
 
-.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container .tab,
-.monaco-workbench .part.editor .content .editor-group-container .title .tabs-container .tab {
+.monaco-workbench .part.editor .content .editor-group-container .title .tabs-container .tab,
+.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container .tab {
   -webkit-app-region: no-drag; /* Allow dragging tabs to re-order */
 }
