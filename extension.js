@@ -19,7 +19,7 @@ const patches = {
     ],
     [
       '"activitybarWidth",{get:function(){return',
-      '"activitybarWidth",{get:function(){this.partLayoutInfo.activitybar.width=78;return'        
+      `"activitybarWidth",{get:function(){this.partLayoutInfo.activitybar.width=parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--traffic-light-width'), 10);return`
     ]
   ],
   'vs/workbench/workbench.main.css': [
