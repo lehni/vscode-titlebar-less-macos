@@ -1,12 +1,17 @@
 # Change Log
 
+## Version 1.0.7
+
+- Move badges in activity bar close to original location in relation to icon.
+- Fix dragging on area around traffic lights on activity-bar
+
 ## Version 1.0.6
 
-- Fix dragging on area around traffic lights when activity bar is hidden.
+- Fix dragging on area around traffic lights when activity-bar is hidden.
 
 ## Version 1.0.5
 
-- Support dragging tab bar in recent versions of VSCode.
+- Support dragging tab-bar in recent versions of VSCode.
 
 ## Version 1.0.4
 

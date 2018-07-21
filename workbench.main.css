@@ -54,22 +54,22 @@
    right: 16px;
 }
 
-/* Allow dragging on the .activitybar */
+/* Allow dragging on the .activitybar... */
 .monaco-workbench.fullscreen .activitybar {
   -webkit-app-region: drag;
 }
 
-/* Still allow to click actions without dragging though */
+/* ...but still allow to click actions without dragging */
 .monaco-workbench.fullscreen .activitybar .content .monaco-action-bar {
   -webkit-app-region: no-drag;
 }
 
- /* Allow dragging on .sidebar title */
+ /* Allow dragging on .sidebar title... */
  .monaco-workbench.fullscreen .sidebar .composite.title {
   -webkit-app-region: drag;
 }
 
-/* Still allow to click actions without dragging though */
+/* ...but still allow to click actions without dragging */
 .monaco-workbench.fullscreen .sidebar .title .title-actions .action-label {
   -webkit-app-region: no-drag;
 }
@@ -80,13 +80,13 @@
  * TODO: Remove .one-editor-silo in Fall 2018
  */
 
-/* Allow dragging on empty space in tabs */
+/* Allow dragging on tab-bar... */
 .monaco-workbench.fullscreen .part.editor .content .editor-group-container .title .tabs-container,
 .monaco-workbench.fullscreen .part.editor .content .one-editor-silo .container .title .tabs-container {
   -webkit-app-region: drag;
 }
 
-/* Allow dragging tabs to re-order */
+/* ...but still allow dragging tabs to re-order */
 .monaco-workbench.fullscreen .part.editor .content .editor-group-container .title .tabs-container .tab,
 .monaco-workbench.fullscreen .part.editor .content .one-editor-silo .container .title .tabs-container .tab {
   -webkit-app-region: no-drag;
