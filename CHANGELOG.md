@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.0.5
+
+- Support dragging tab bar in recent versions of VSCode
+
 ## Version 1.0.4
 
 - Add disclaimer and update notes to README.
