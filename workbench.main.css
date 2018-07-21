@@ -55,10 +55,12 @@
   -webkit-app-region: no-drag; /* Still allow to click actions without dragging though */
 }
 
-.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container {
+.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container,
+.monaco-workbench .part.editor .content .editor-group-container .title .tabs-container {
   -webkit-app-region: drag; /* Allow dragging on empty space in tabs */
 }
 
-.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container .tab {
+.monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container .tab,
+.monaco-workbench .part.editor .content .editor-group-container .title .tabs-container .tab {
   -webkit-app-region: no-drag; /* Allow dragging tabs to re-order */
 }
