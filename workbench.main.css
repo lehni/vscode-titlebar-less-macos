@@ -13,28 +13,27 @@
 /* Make .activitybar wider to align with traffic lights */ 
 .monaco-workbench.fullscreen .activitybar,
 .monaco-workbench.fullscreen .activitybar .content {
-  width: var(--traffic-width) !important;
-  min-width: var(--traffic-width);
+  width: var(--traffic-width);
 }
 
 /* Move .activitybar .content down to not be covered by traffic lights */
 .monaco-workbench.fullscreen .activitybar .content .monaco-action-bar.vertical {
-  padding-top: var(--traffic-height); 
+  margin-top: var(--traffic-height); 
 }
 
 /* Move .sidebar title when .activitybar is hidden */
 .monaco-workbench.fullscreen .activitybar[aria-hidden="true"] + .sidebar > .title {
-	padding-left: var(--traffic-width);
+  padding-left: var(--traffic-width);
 }
 
 /* Move first .tab when .sidebar is hidden... */
 .monaco-workbench.fullscreen.nosidebar .tabs-container > .tab:first-child {
-	margin-left: var(--traffic-width);
+  margin-left: var(--traffic-width);
 }
 
 /* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
 .monaco-workbench.fullscreen .activitybar:not([aria-hidden="true"]) + .sidebar + .editor .tabs-container > .tab:first-child {
-	margin-left: 0;
+  margin-left: 0;
 }
 
 .monaco-workbench.fullscreen .activitybar .content .monaco-action-bar .action-label {
@@ -44,7 +43,7 @@
 
 .monaco-workbench.fullscreen .activitybar .content .monaco-action-bar .action-item::before {
   width: auto;
-  right: 9px;
+  right: 0;
 }
 
 .monaco-workbench.fullscreen .activitybar .content .monaco-action-bar .badge {
