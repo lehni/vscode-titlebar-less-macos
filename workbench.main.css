@@ -4,8 +4,8 @@
  */
 
 :root {
-  --traffic-width: 78px;
-  --traffic-height: 35px;
+  --traffic-light-width: 78px;
+  --traffic-light-height: 35px;
 }
 
 /* fullscreen is forced to remove the titlebar, so use .fullscreen as filter */
@@ -13,22 +13,22 @@
 /* Make .activitybar wider to align with traffic lights */ 
 .monaco-workbench.fullscreen .activitybar,
 .monaco-workbench.fullscreen .activitybar .content {
-  width: var(--traffic-width);
+  width: var(--traffic-light-width);
 }
 
 /* Move .activitybar .content down to not be covered by traffic lights */
 .monaco-workbench.fullscreen .activitybar .content .monaco-action-bar.vertical {
-  margin-top: var(--traffic-height); 
+  margin-top: var(--traffic-light-height); 
 }
 
 /* Move .sidebar title when .activitybar is hidden */
 .monaco-workbench.fullscreen .activitybar[aria-hidden="true"] + .sidebar > .title {
-  padding-left: var(--traffic-width);
+  padding-left: var(--traffic-light-width);
 }
 
 /* Move first .tab when .sidebar is hidden... */
 .monaco-workbench.fullscreen.nosidebar .tabs-container > .tab:first-child {
-  margin-left: var(--traffic-width);
+  margin-left: var(--traffic-light-width);
 }
 
 /* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
