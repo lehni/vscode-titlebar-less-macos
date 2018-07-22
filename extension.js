@@ -35,10 +35,8 @@ const patches = {
 }
 
 const messages = {
-  enabled: 'Titlebar-less mode enabled. Please restart VSCode to see effect.',
-  disabled: 'Titlebar-less mode disabled. Please restart VSCode to see effect.',
-  failedToEnable: details => `Unable to apply all patches (${details})`,
-  failedToDisable: details => `Unable to remove all patches (${details})`
+  success: verb => `Titlebar-less mode ${verb}. Please restart VSCode to see effect.`,
+  fail: (verb, result) => `Unable to ${verb} all patches (${result.applied}/${result.total})`
 }
 
 exports.activate = function activate(context) {
@@ -49,23 +47,31 @@ exports.activate = function activate(context) {
 }
 
 function enable() {
-  const { success, details } = applyPatches(true)
-  vscode.window.showInformationMessage(success
-    ? messages.enabled
-    : messages.failedToEnable(details)
-  )
+  // Always try to disable before enabling, but ignore if nothing was there to
+  // disable (= it was already disabled before).
+  let result = applyPatches(false)
+  if (result.success || result.applied === 0) {
+    result = applyPatches(true)
+    vscode.window.showInformationMessage(result.success
+      ? messages.success('enabled')
+      : messages.fail('apply', result)
+    )
+  } else {
+    vscode.window.showInformationMessage(messages.fail('remove', result))
+  }
 }
 
 function disable() {
-  const { success, details } = applyPatches(false)
-  vscode.window.showInformationMessage(success
-    ? messages.disabled
-    : messages.failedToDisable(details)
+  const result = applyPatches(false)
+  // Ignore if nothing was there to disable (= it was already disabled before).
+  vscode.window.showInformationMessage(result.success || result.applied === 0
+    ? messages.success('disabled')
+    : messages.fail('remove', result)
   )
 }
 
 function applyPatches(enable) {
-  let success = 0
+  let applied = 0
   let total = 0
   for (const [filePath, filePatches] of Object.entries(patches)) {
     const file = path.join(appDir, ...filePath.split('/'))
@@ -75,33 +81,49 @@ function applyPatches(enable) {
       for (const [find, replace] of filePatches) {
         if (patch(file, backup && orig, find, replace)) {
           backup = false
-          success++
+          applied++
         }
         total++
       }
     } else {
-      if (restore(file, orig)) {
-        success++
+      const amount = filePatches.length
+      // See if the file has been patched with all the patches.
+      let found = 0
+      for (const [find, replace] of filePatches) {
+        if (contains(file, replace)) {
+          found++
+        }
       }
-      total++
+      // Only restore if all the patches were found. If not, then VSCode must
+      // have been updated in the meantime, in which case the orig file needs
+      // to be removed.
+      if (found === amount && restore(file, orig)) {
+        applied += amount
+      } else {
+        remove(orig)
+      }
+      total += amount
     }
   }
   return {
-    success: success === total,
-    details: `${success}/${total}`
+    success: applied === total,
+    applied,
+    total
   }
 }
 
 function patch(file, orig, find, replace) {
   try {
     const content = fs.readFileSync(file, fsOptions)
-    const patched = content.replace(find, replace)
-    if (patched !== content) {
-      if (orig) {
-        fs.renameSync(file, orig)
+    if (content.indexOf(replace) === -1) {
+      const patched = content.replace(find, replace)
+      if (patched !== content) {
+        if (orig) {
+          fs.renameSync(file, orig)
+        }
+        fs.writeFileSync(file, patched, fsOptions)
+        return true
       }
-      fs.writeFileSync(file, patched, fsOptions)
-      return true
     }
   } catch (err) {
     console.error(err)
@@ -114,6 +136,30 @@ function restore(file, orig) {
     if (fs.existsSync(orig)) {
       fs.unlinkSync(file)
       fs.renameSync(orig, file)
+      return true
+    }
+  } catch (err) {
+    console.error(err)
+  }
+  return false
+}
+
+function remove(file) {
+  try {
+    if (fs.existsSync(file)) {
+      fs.unlinkSync(file)
+      return true
+    }
+  } catch (err) {
+    console.error(err)
+  }
+  return false
+}
+
+function contains(file, str) {
+  try {
+    const content = fs.readFileSync(file, fsOptions)
+    if (content.indexOf(str) !== -1) {
       return true
     }
   } catch (err) {

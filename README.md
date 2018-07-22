@@ -50,43 +50,31 @@ them, choose `Code` > `Preferences` > `Settings` in the menu, and add / change
 these lines:
 
 ```json
-  "window.titleBarStyle": "custom",
-  "window.nativeTabs": false,
+"window.titleBarStyle": "custom",
+"window.nativeTabs": false,
  ```
 
 ## Disclaimer / A Word of Caution
 
 This extension modifies files that are part of the core of VSCode, so use it at
-your own risk. If anything goes wrong, you can always reinstall VSCode from
+your own risk.
+
+This extension creates backup files before modifying the core files, and these
+can be restored at any time using the `Titlebar-Less: Disable` command.
+
+If anything goes wrong, you can always reinstall VSCode from
 [code.visualstudio.com](https://code.visualstudio.com/download) without loosing
 any settings or installed extensions.
 
-## Updating Titlebar-Less
+## Updating VSCode / Titlebar-Less
 
-Up to version 1.0.2, this extension was using a fragile approach to restore
-previously applied modifications that would only work correctly within the same
-version of the extension. In order to update to newer versions from these early
-versions, you need to first run `Titlebar-Less: Disable` before updating, and
-then run `Titlebar-Less: Enable` after the update.
+When either VSCode or this extension is updated to a newer version, you can
+reapply the extension's modifications of the core files simply by running this
+command again, followed by a restart of the full application:
 
-Newer versions create backup files before modifying the core files, and they can
-be restored at any time. So with these, you can first update the extension, then
-run the commands in this sequence to get to the newer version of the
-modifications:
-
-```
-Titlebar-Less: Disable
+```js
 Titlebar-Less: Enable
 ```
-
-## Updating VSCode
-
-Note that after any updates to VSCode, this extension needs to be enabled again
-by running: `Titlebar-Less: Enable`, followed by a restart of the full
-application.
-
-NOTE: Do not run `Titlebar-Less: Disable` after such an update, because that may
-actually wrongly restore backups from a previous version of VSCode.
 
 ## Before / After
 
