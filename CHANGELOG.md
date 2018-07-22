@@ -1,9 +1,18 @@
 # Change Log
 
+## Version 1.0.8
+
+- Add support for fullscreen mode.
+- Only apply styling overrides if `"window.titleBarStyle"` setting is set to
+  `"custom"`.
+- Read activity-bar width from CSS variable, so it can optionally be changed / overridden
+  with the [Custom CSS and JS Loader](https://marketplace.visualstudio.com/items?itemName=be5invis.vscode-custom-css)
+  extension (e.g. when using the `"window.zoomLevel"` setting).
+
 ## Version 1.0.7
 
-- Move badges in activity bar close to original location in relation to icon.
-- Fix dragging on area around traffic lights on activity-bar
+- Move badges in activity-bar close to original location in relation to icon.
+- Fix dragging on area around traffic lights on activity-bar.
 
 ## Version 1.0.6
 
