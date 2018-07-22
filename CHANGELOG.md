@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.0.9
+
+- Improve robustness of enable / disable commands.
+
 ## Version 1.0.8
 
 - Add support for fullscreen mode.
