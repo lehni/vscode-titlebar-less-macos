@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.0.10
+
+- Avoid invalid restores over newer versions of VSCode by using VSCode version
+  for versioned backups.
+
 ## Version 1.0.9
 
 - Improve robustness of enable / disable commands.
