@@ -25,12 +25,11 @@ const patches = {
       `"activitybarWidth",{get:function(){
         var classList = this.workbenchContainer.classList;
         // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom":
-        if ("custom" === this.themeService.configurationService.getValue().window.titleBarStyle) {
+        if ("custom" === this.partService.configurationService.getValue().window.titleBarStyle) {
           // Add .titlebar-less to .monaco-workbench, see workbench.main.css
           classList.add("titlebar-less");
-          // Fetch the --traffic-light-width CSS variable, and assign it to activitybar width:
-          var width = window.getComputedStyle(document.documentElement).getPropertyValue("--traffic-light-width");
-          this.partLayoutInfo.activitybar.width = parseFloat(width);
+          // Get the activitybar width from the modified CSS settings:
+          this.partLayoutInfo.activitybar.width = parseFloat(window.getComputedStyle(this.partService.activitybarPart.parent).width);
         } else {
           classList.remove("titlebar-less");
         }
