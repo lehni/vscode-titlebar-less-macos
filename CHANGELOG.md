@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.0.11
+
+- Add support for latest VSCode Insiders version by removing reliance on
+  `.titlebar-style-custom` CSS class.
+
 ## Version 1.0.10
 
 - Avoid invalid restores over newer versions of VSCode by using VSCode version
