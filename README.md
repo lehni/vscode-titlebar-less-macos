@@ -35,8 +35,12 @@ Titlebar-Less: Disable // Disable titlebar-less mode on macOS (restores core fil
 After executing either of these commands, you need to fully restart VSCode in
 order to see the extension's effect. Simply reloading the window is not enough.
 
-If VSCode complains about it being corrupted after the restart, choose `don't
-show again`.
+If VSCode complains about it being corrupted after the restart, choose `Don't
+Show Again`:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/dont-show-again.png" alt="Don't Show Again" width="460">
+</p>
 
 See [Disclaimer / A Word of Caution](#disclaimer--a-word-of-caution) for
 details.
