@@ -15,66 +15,66 @@
  */
 
 /* Make .activitybar wider to align with traffic lights */ 
-.titlebar-style-custom .monaco-workbench .activitybar,
-.titlebar-style-custom .monaco-workbench .activitybar .content {
+.monaco-workbench.titlebar-less .activitybar,
+.monaco-workbench.titlebar-less .activitybar .content {
   width: var(--traffic-light-width);
 }
 
 /* Move .activitybar .content down to not be covered by traffic lights */
-.titlebar-style-custom .monaco-workbench:not(.fullscreen) .activitybar .content .monaco-action-bar.vertical {
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar .content .monaco-action-bar.vertical {
   margin-top: var(--traffic-light-height); 
 }
 
 /* Move .sidebar title when .activitybar is hidden */
-.titlebar-style-custom .monaco-workbench:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar > .title {
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar > .title {
   padding-left: var(--traffic-light-width);
 }
 
 /* Move first .tab when .sidebar is hidden... */
-.titlebar-style-custom .monaco-workbench.nosidebar:not(.fullscreen) .tabs-container > .tab:first-child {
+.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .tabs-container > .tab:first-child {
   margin-left: var(--traffic-light-width);
 }
 
 /* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
-.titlebar-style-custom .monaco-workbench:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar + .editor .tabs-container > .tab:first-child {
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar + .editor .tabs-container > .tab:first-child {
   margin-left: 0;
 }
 
-.titlebar-style-custom .monaco-workbench .activitybar .content .monaco-action-bar .action-label {
+.monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .action-label {
   width: auto;
   background-position: center;
 }
 
-.titlebar-style-custom .monaco-workbench .activitybar .content .monaco-action-bar .action-item::before {
+.monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .action-item::before {
   width: auto;
   right: 0;
 }
 
-.titlebar-style-custom .monaco-workbench .activitybar .content .monaco-action-bar .badge {
+.monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .badge {
   width: 100%;
 }
 
-.titlebar-style-custom .monaco-workbench .activitybar .content .monaco-action-bar .badge .badge-content {
+.monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .badge .badge-content {
    right: 16px;
 }
 
 /* Allow dragging on the .activitybar... */
-.titlebar-style-custom .monaco-workbench .activitybar {
+.monaco-workbench.titlebar-less .activitybar {
   -webkit-app-region: drag;
 }
 
 /* ...but still allow to click actions without dragging */
-.titlebar-style-custom .monaco-workbench .activitybar .content .monaco-action-bar {
+.monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar {
   -webkit-app-region: no-drag;
 }
 
  /* Allow dragging on .sidebar title... */
- .titlebar-style-custom .monaco-workbench .sidebar .composite.title {
+ .monaco-workbench.titlebar-less .sidebar .composite.title {
   -webkit-app-region: drag;
 }
 
 /* ...but still allow to click actions without dragging */
-.titlebar-style-custom .monaco-workbench .sidebar .title .title-actions .action-label {
+.monaco-workbench.titlebar-less .sidebar .title .title-actions .action-label {
   -webkit-app-region: no-drag;
 }
 
@@ -85,13 +85,13 @@
  */
 
 /* Allow dragging on tab-bar... */
-.titlebar-style-custom .monaco-workbench .part.editor .content .editor-group-container .title .tabs-container,
-.titlebar-style-custom .monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container {
+.monaco-workbench.titlebar-less .part.editor .content .editor-group-container .title .tabs-container,
+.monaco-workbench.titlebar-less .part.editor .content .one-editor-silo .container .title .tabs-container {
   -webkit-app-region: drag;
 }
 
 /* ...but still allow dragging tabs to re-order */
-.titlebar-style-custom .monaco-workbench .part.editor .content .editor-group-container .title .tabs-container .tab,
-.titlebar-style-custom .monaco-workbench .part.editor .content .one-editor-silo .container .title .tabs-container .tab {
+.monaco-workbench.titlebar-less .part.editor .content .editor-group-container .title .tabs-container .tab,
+.monaco-workbench.titlebar-less .part.editor .content .one-editor-silo .container .title .tabs-container .tab {
   -webkit-app-region: no-drag;
 }

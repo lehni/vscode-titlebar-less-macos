@@ -14,15 +14,27 @@ const patches = {
     ]
   ],
   'vs/workbench/workbench.main.js': [
-    // Never show the TITLEBAR_PART when "window.titleBarStyle" === "custom" 
+    // Never show the TITLEBAR_PART when "window.titleBarStyle" is "custom" 
     [
       'TITLEBAR_PART:return"custom"===this.getCustomTitleBarStyle()&&!h.isFullscreen()',
       'TITLEBAR_PART:return false'
     ],
-    // Read and set the activitybar width from the CSS variable
+    // Handle setting of activitybar width and .titlebar-less class on .monaco-workbench
     [
       '"activitybarWidth",{get:function(){return',
-      `"activitybarWidth",{get:function(){if("custom"===this.themeService.configurationService.getValue().window.titleBarStyle)this.partLayoutInfo.activitybar.width=parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue("--traffic-light-width"));return`
+      `"activitybarWidth",{get:function(){
+        var classList = this.workbenchContainer.classList;
+        // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom":
+        if ("custom" === this.themeService.configurationService.getValue().window.titleBarStyle) {
+          // Add .titlebar-less to .monaco-workbench, see workbench.main.css
+          classList.add("titlebar-less");
+          // Fetch the --traffic-light-width CSS variable, and assign it to activitybar width:
+          var width = window.getComputedStyle(document.documentElement).getPropertyValue("--traffic-light-width");
+          this.partLayoutInfo.activitybar.width = parseFloat(width);
+        } else {
+          classList.remove("titlebar-less");
+        }
+        return`
     ]
   ],
   'vs/workbench/workbench.main.css': [
