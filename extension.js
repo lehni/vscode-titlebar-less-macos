@@ -22,7 +22,7 @@ const patches = {
     // Read and set the activitybar width from the CSS variable
     [
       '"activitybarWidth",{get:function(){return',
-      `"activitybarWidth",{get:function(){if("custom"===this.themeService.configurationService.getValue().window.titleBarStyle)this.partLayoutInfo.activitybar.width=parseInt(window.getComputedStyle(document.documentElement).getPropertyValue("--traffic-light-width"), 10);return`
+      `"activitybarWidth",{get:function(){if("custom"===this.themeService.configurationService.getValue().window.titleBarStyle)this.partLayoutInfo.activitybar.width=parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue("--traffic-light-width"));return`
     ]
   ],
   'vs/workbench/workbench.main.css': [
@@ -44,6 +44,7 @@ exports.activate = function activate(context) {
     vscode.commands.registerCommand('titlebarLess.enable', enable),
     vscode.commands.registerCommand('titlebarLess.disable', disable)
   )
+  removeOldOrigFiles()
 }
 
 function enable() {
@@ -74,35 +75,34 @@ function applyPatches(enable) {
   let applied = 0
   let total = 0
   for (const [filePath, filePatches] of Object.entries(patches)) {
-    const file = path.join(appDir, ...filePath.split('/'))
-    const orig = `${file}.orig`
-    if (enable) {
-      let backup = true
-      for (const [find, replace] of filePatches) {
-        if (patch(file, backup && orig, find, replace)) {
-          backup = false
-          applied++
-        }
-        total++
-      }
-    } else {
+    const file = getFilePath(filePath)
+    const orig = `${file}.orig.${vscode.version}`
+    try {
       const amount = filePatches.length
-      // See if the file has been patched with all the patches.
-      let found = 0
-      for (const [find, replace] of filePatches) {
-        if (contains(file, replace)) {
-          found++
+      total += amount
+      if (enable) {
+        let content = fs.readFileSync(file, fsOptions)
+        let found = 0
+        for (const [find, replace] of filePatches) {
+          if (content.indexOf(replace) === -1) {
+            content = content.replace(find, replace)
+            found++
+          }
+        }
+        if (found === amount) {
+          fs.renameSync(file, orig)
+          fs.writeFileSync(file, content, fsOptions)
+          applied += amount
+        }
+      } else {
+        if (fs.existsSync(orig)) {
+          fs.unlinkSync(file)
+          fs.renameSync(orig, file)
+          applied += amount
         }
       }
-      // Only restore if all the patches were found. If not, then VSCode must
-      // have been updated in the meantime, in which case the orig file needs
-      // to be removed.
-      if (found === amount && restore(file, orig)) {
-        applied += amount
-      } else {
-        remove(orig)
-      }
-      total += amount
+    } catch (err) {
+      console.error(err)
     }
   }
   return {
@@ -112,60 +112,22 @@ function applyPatches(enable) {
   }
 }
 
-function patch(file, orig, find, replace) {
-  try {
-    const content = fs.readFileSync(file, fsOptions)
-    if (content.indexOf(replace) === -1) {
-      const patched = content.replace(find, replace)
-      if (patched !== content) {
-        if (orig) {
-          fs.renameSync(file, orig)
-        }
-        fs.writeFileSync(file, patched, fsOptions)
-        return true
-      }
+function removeOldOrigFiles() {
+  // Remove all old backup files that aren't related to the current version
+  // of VSCode anymore.
+  for (const filePath of Object.keys(patches)) {
+    const dir = path.dirname(getFilePath(filePath))
+    const oldOrigFiles = fs.readdirSync(dir)
+      .filter(file => /\.orig\./.test(file))
+      .filter(file => !file.endsWith(vscode.version))
+    for (const file of oldOrigFiles) {
+      fs.unlinkSync(path.join(dir, file))
     }
-  } catch (err) {
-    console.error(err)
   }
-  return false
 }
 
-function restore(file, orig) {
-  try {
-    if (fs.existsSync(orig)) {
-      fs.unlinkSync(file)
-      fs.renameSync(orig, file)
-      return true
-    }
-  } catch (err) {
-    console.error(err)
-  }
-  return false
-}
-
-function remove(file) {
-  try {
-    if (fs.existsSync(file)) {
-      fs.unlinkSync(file)
-      return true
-    }
-  } catch (err) {
-    console.error(err)
-  }
-  return false
-}
-
-function contains(file, str) {
-  try {
-    const content = fs.readFileSync(file, fsOptions)
-    if (content.indexOf(str) !== -1) {
-      return true
-    }
-  } catch (err) {
-    console.error(err)
-  }
-  return false
+function getFilePath(filePath) {
+  return path.join(appDir, ...filePath.split('/'))
 }
 
 function readFile(filename) {
