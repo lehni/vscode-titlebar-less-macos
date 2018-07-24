@@ -56,7 +56,7 @@
 }
 
 .monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .badge .badge-content {
-  left: calc(50% + 5px); /* So it works for all zoom levels */
+  left: calc(50% + 0.5em); /* Relative to font-size, so it works on all zoom levels */
   right: auto;
 }
 
