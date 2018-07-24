@@ -23,7 +23,7 @@ const patches = {
     [
       // Patch the full layout function in layout.ts, and parse it to retrieve
       // its parameter and the object on which to call `getZoomFactor()`:
-      /\.layout\=function\((\w+)\)\{(this\.workbenchSize\=[\s\S]*(\w+).getZoomFactor\(\)[\s\S]*contextViewService.layout\(\))}/m,
+      /\.layout=function\((\w+)\)\{(this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.contextViewService\.layout\(\))}/m,
       (all, param, body, browser) => {
         return `.layout=function(${param}){
           // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom":
@@ -63,7 +63,7 @@ exports.activate = function activate(context) {
     vscode.commands.registerCommand('titlebarLess.enable', enable),
     vscode.commands.registerCommand('titlebarLess.disable', disable)
   )
-  removeOldOrigFiles()
+  cleanupOrigFiles()
 }
 
 function enable() {
@@ -132,7 +132,7 @@ function applyPatches(enable) {
   }
 }
 
-function removeOldOrigFiles() {
+function cleanupOrigFiles() {
   // Remove all old backup files that aren't related to the current version
   // of VSCode anymore.
   for (const filePath of Object.keys(patches)) {
