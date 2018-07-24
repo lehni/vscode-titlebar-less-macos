@@ -39,7 +39,7 @@ If VSCode complains about it being corrupted after the restart, choose `Don't
 Show Again`:
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/dont-show-again.png" alt="Don't Show Again" width="460">
+  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/dont-show-again.png" alt="Don't Show Again" width="585" height="132">
 </p>
 
 See [Disclaimer / A Word of Caution](#disclaimer--a-word-of-caution) for
@@ -82,7 +82,9 @@ Titlebar-Less: Enable
 
 ## Before / After
 
-![Before/After](https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/before-after.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/before-after.png" alt="Before/After">
+</p>
 
 ## Inspiration
 
