@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.1.0
+
+- Add proper support for zoom levels
+
 ## Version 1.0.11
 
 - Add support for latest VSCode Insiders version by removing reliance on
