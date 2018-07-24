@@ -5,8 +5,8 @@
  */
 
 :root {
-  --traffic-light-width: 78px;
-  --traffic-light-height: 35px;
+  --traffic-lights-width: 78px;
+  --traffic-lights-height: 35px;
 }
 
 /**
@@ -17,22 +17,22 @@
 /* Make .activitybar wider to align with traffic lights */ 
 .monaco-workbench.titlebar-less .activitybar,
 .monaco-workbench.titlebar-less .activitybar .content {
-  width: var(--traffic-light-width);
+  width: var(--traffic-lights-width);
 }
 
 /* Move .activitybar .content down to not be covered by traffic lights */
 .monaco-workbench.titlebar-less:not(.fullscreen) .activitybar .content .monaco-action-bar.vertical {
-  margin-top: var(--traffic-light-height); 
+  margin-top: var(--traffic-lights-height); 
 }
 
 /* Move .sidebar title when .activitybar is hidden */
 .monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar > .title {
-  padding-left: var(--traffic-light-width);
+  padding-left: var(--traffic-lights-width);
 }
 
 /* Move first .tab when .sidebar is hidden... */
 .monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .tabs-container > .tab:first-child {
-  margin-left: var(--traffic-light-width);
+  margin-left: var(--traffic-lights-width);
 }
 
 /* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
@@ -43,6 +43,7 @@
 .monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .action-label {
   width: auto;
   background-position: center;
+  padding: 0;
 }
 
 .monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .action-item::before {
@@ -55,7 +56,8 @@
 }
 
 .monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .badge .badge-content {
-   right: 16px;
+  left: calc(50% + 5px); /* So it works for all zoom levels */
+  right: auto;
 }
 
 /* Allow dragging on the .activitybar... */

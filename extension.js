@@ -19,21 +19,29 @@ const patches = {
       'TITLEBAR_PART:return"custom"===this.getCustomTitleBarStyle()&&!h.isFullscreen()',
       'TITLEBAR_PART:return false'
     ],
-    // Handle setting of activitybar width and .titlebar-less class on .monaco-workbench
+    // Handle setting of traffic-lights size and .titlebar-less class on .monaco-workbench
     [
-      '"activitybarWidth",{get:function(){return',
-      `"activitybarWidth",{get:function(){
-        var classList = this.workbenchContainer.classList;
-        // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom":
-        if ("custom" === this.partService.configurationService.getValue().window.titleBarStyle) {
-          // Add .titlebar-less to .monaco-workbench, see workbench.main.css
-          classList.add("titlebar-less");
-          // Get the activitybar width from the modified CSS settings:
-          this.partLayoutInfo.activitybar.width = parseFloat(window.getComputedStyle(this.partService.activitybarPart.parent).width);
-        } else {
-          classList.remove("titlebar-less");
-        }
-        return`
+      // Patch the full layout function in layout.ts, and parse it to retrieve
+      // its parameter and the object on which to call `getZoomFactor()`:
+      /\.layout\=function\((\w+)\)\{(this\.workbenchSize\=[\s\S]*(\w+).getZoomFactor\(\)[\s\S]*contextViewService.layout\(\))}/m,
+      (all, param, body, browser) => {
+        return `.layout=function(${param}){
+          // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom":
+          if ("custom" === this.partService.configurationService.getValue().window.titleBarStyle) {
+            // Take zoom-factor into account:
+            var factor = ${browser}.getZoomFactor();
+            var width = 78 / factor;
+            var height = 35 / factor;
+            var style = document.documentElement.style;
+            style.setProperty("--traffic-lights-width", width + "px");
+            style.setProperty("--traffic-lights-height", height + "px");
+            // Add .titlebar-less to .monaco-workbench, see workbench.main.css
+            this.workbenchContainer.classList.add("titlebar-less");
+            this.partLayoutInfo.activitybar.width = width;
+          }
+          ${body}
+        }`
+      }
     ]
   ],
   'vs/workbench/workbench.main.css': [
@@ -95,8 +103,9 @@ function applyPatches(enable) {
         let content = fs.readFileSync(file, fsOptions)
         let found = 0
         for (const [find, replace] of filePatches) {
-          if (content.indexOf(replace) === -1) {
-            content = content.replace(find, replace)
+          const patched = content.replace(find, replace)
+          if (patched !== content) {
+            content = patched
             found++
           }
         }
