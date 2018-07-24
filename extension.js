@@ -28,16 +28,16 @@ const patches = {
         return `.layout=function(${param}){
           // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom":
           if ("custom" === this.partService.configurationService.getValue().window.titleBarStyle) {
-            // Take zoom-factor into account:
+            // Add .titlebar-less to .monaco-workbench, see workbench.main.css
+            this.workbenchContainer.classList.add("titlebar-less");
+            // Set traffic-lights size, taking zoom-factor into account:
             var factor = ${browser}.getZoomFactor();
             var width = 78 / factor;
             var height = 35 / factor;
+            this.partLayoutInfo.activitybar.width = width;
             var style = document.documentElement.style;
             style.setProperty("--traffic-lights-width", width + "px");
             style.setProperty("--traffic-lights-height", height + "px");
-            // Add .titlebar-less to .monaco-workbench, see workbench.main.css
-            this.workbenchContainer.classList.add("titlebar-less");
-            this.partLayoutInfo.activitybar.width = width;
           }
           ${body}
         }`
