@@ -35,12 +35,19 @@ Titlebar-Less: Disable // Disable titlebar-less mode on macOS (restores core fil
 After executing either of these commands, you need to fully restart VSCode in
 order to see the extension's effect. Simply reloading the window is not enough.
 
-If VSCode complains about it being corrupted after the restart, choose `Don't
-Show Again`:
+If VSCode complains about it being corrupted after the restart, you have two
+options:
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/dont-show-again.png" alt="Don't Show Again">
-</p>
+1. Install the
+   [vscode-fix-checksums](https://marketplace.visualstudio.com/items?itemName=lehni.vscode-fix-checksums)
+   extension and adjust the internal checksums to prevent this error from being
+   displayed. This will also solve the display of `[Unsupported]` in titles and
+   menus.
+
+2. Choose `Don't Show Again`:
+    <p align="center">
+      <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/dont-show-again.png" alt="Don't Show Again">
+    </p>
 
 See [Disclaimer / A Word of Caution](#disclaimer--a-word-of-caution) for
 details.
@@ -75,7 +82,7 @@ sudo "/Applications/Visual Studio Code - Insiders.app/Contents/MacOS/Electron"
 ```
 
 Once you ave applied the patches by executing `Titlebar-Less: Enable` as root,
-quit VScode and start it normally without root privileges again.
+quit VSCode and start it normally without root privileges again.
 
 ## Disclaimer / A Word of Caution
 
