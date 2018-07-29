@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.3.2
+
+- Include link to lehni.vscode-fix-checksums extension
+
 ## Version 1.3.1
 
 - Do not move first tab in additional split views
