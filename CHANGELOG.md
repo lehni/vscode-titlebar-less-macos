@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.3.3
+
+- Improve README
+- Add recommendations
+
 ## Version 1.3.2
 
 - Include link to lehni.vscode-fix-checksums extension
