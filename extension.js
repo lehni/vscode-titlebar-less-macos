@@ -5,18 +5,20 @@ const path = require('path')
 const appDir = path.dirname(require.main.filename)
 const fsOptions = { encoding: 'utf8' }
 
+const version = parseFloat(vscode.version)
+
 const patches = {
   'vs/code/electron-main/main.js': [
     // Change the Electron titleBarStyle to "hidden-inset"
     [
       '.titleBarStyle="hidden",',
-      '.titleBarStyle="hidden-inset",'
+      `.titleBarStyle="${version < 1.26 ? 'hidden-inset' : 'hiddenInset' }",`
     ]
   ],
   'vs/workbench/workbench.main.js': [
     // Never show the TITLEBAR_PART when "window.titleBarStyle" is "custom" 
     [
-      'TITLEBAR_PART:return"custom"===this.getCustomTitleBarStyle()&&!h.isFullscreen()',
+      'TITLEBAR_PART:return"custom"===this.getCustomTitleBarStyle()',
       'TITLEBAR_PART:return false'
     ],
     // Handle setting of traffic-lights size and .titlebar-less class on .monaco-workbench
