@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.3.0
+
+- Add support for side-bar on the right
+
 ## Version 1.2.0
 
 - Support Electron 2.0 in VSCode 1.26.0-insider and newer
