@@ -37,9 +37,11 @@
   margin-left: var(--traffic-lights-width);
 }
 
-/* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .tabs-container > .tab:first-child {
-  margin-left: 0;
+/* ...but when .activitybar is visible and .sidebar is hidden...  */
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .tabs-container > .tab:first-child,
+/* ...or when there's a split-view with multiple tab,s don't move first .tab */
+.monaco-workbench.titlebar-less .split-view-view + .split-view-view .tabs-container > .tab:first-child {
+  margin-left: 0 !important;
 }
 
 .monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .action-label {
