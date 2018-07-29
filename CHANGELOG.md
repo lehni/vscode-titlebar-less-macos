@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.3.1
+
+- Do not move first tab in additional split views
+
 ## Version 1.3.0
 
 - Add support for side-bar on the right
