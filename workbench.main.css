@@ -21,22 +21,24 @@
 }
 
 /* Move .activitybar .content down to not be covered by traffic lights */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar .content .monaco-action-bar.vertical {
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not(.right) .content .monaco-action-bar.vertical {
   margin-top: var(--traffic-lights-height); 
 }
 
-/* Move .sidebar title when .activitybar is hidden */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar > .title {
+/* Move .sidebar title when .activitybar is hidden and .sidebar is not on the right */
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar:not(.right) > .title {
   padding-left: var(--traffic-lights-width);
 }
 
 /* Move first .tab when .sidebar is hidden... */
-.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .tabs-container > .tab:first-child {
+.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .tabs-container > .tab:first-child,
+/* ...or when .sidebar is on the right... */
+.monaco-workbench.titlebar-less .sidebar.right + .editor .tabs-container > .tab:first-child {
   margin-left: var(--traffic-lights-width);
 }
 
 /* ...but when .activitybar is visible and .sidebar is hidden, don't move first .tab  */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar + .editor .tabs-container > .tab:first-child {
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .tabs-container > .tab:first-child {
   margin-left: 0;
 }
 
