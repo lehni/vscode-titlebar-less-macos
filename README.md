@@ -58,6 +58,25 @@ these lines:
 "window.nativeTabs": false,
  ```
 
+## Installing on macOS 10.14 Mojave
+
+Due to security restrictions on macOS 10.14, VSCode needs to run as root
+in order to be able to apply the patches. To do so, open the `Terminal.app` and
+run:
+
+```sh
+sudo "/Applications/Visual Studio Code.app/Contents/MacOS/Electron"
+```
+
+Or this if you're using VSCode Insiders:
+
+```sh
+sudo "/Applications/Visual Studio Code - Insiders.app/Contents/MacOS/Electron"
+```
+
+Once you ave applied the patches by executing `Titlebar-Less: Enable` as root,
+quit VScode and start it normally without root privileges again.
+
 ## Disclaimer / A Word of Caution
 
 This extension modifies files that are part of the core of VSCode, so use it at
