@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.2.0
+
+- Support Electron 2.0 in VSCode 1.26.0-insider and newer
+
 ## Version 1.1.0
 
 - Add proper support for zoom levels
