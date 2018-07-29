@@ -19,7 +19,7 @@
     "url": "https://github.com/lehni/vscode-titlebar-less-macos"
   },
   "engines": {
-    "vscode": "^1.15.0"
+    "vscode": "^1.25.0"
   },
   "keywords": [
     "vscode",
