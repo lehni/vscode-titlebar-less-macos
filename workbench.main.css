@@ -14,34 +14,31 @@
  * so use .titlebar-style-custom as a filter for all modifications.
  */
 
-/* Make .activitybar wider to align with traffic lights */ 
+/* Make activity-bar wider to align with traffic lights */ 
 .monaco-workbench.titlebar-less .activitybar,
 .monaco-workbench.titlebar-less .activitybar .content {
   width: var(--traffic-lights-width);
 }
 
-/* Move .activitybar .content down to not be covered by traffic lights */
+/* Move activity-bar .content down to not be covered by traffic lights */
 .monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not(.right) .content .monaco-action-bar.vertical {
   margin-top: var(--traffic-lights-height); 
 }
 
-/* Move .sidebar title when .activitybar is hidden and .sidebar is not on the right */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar:not(.right) > .title {
+/* Move side-bar title when activity-bar is hidden and side-bar is not on the right */
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar:not(.right) > .title,
+/* Move editor title when side-bar is hidden... */
+.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .editor .title,
+/* ...or when side-bar is on the right... */
+.monaco-workbench.titlebar-less .sidebar.right + .editor .title {
   padding-left: var(--traffic-lights-width);
 }
 
-/* Move first .tab when .sidebar is hidden... */
-.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .tabs-container > .tab:first-child,
-/* ...or when .sidebar is on the right... */
-.monaco-workbench.titlebar-less .sidebar.right + .editor .tabs-container > .tab:first-child {
-  margin-left: var(--traffic-lights-width);
-}
-
-/* ...but when .activitybar is visible and .sidebar is hidden...  */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .tabs-container > .tab:first-child,
-/* ...or when there's a split-view with multiple tab,s don't move first .tab */
-.monaco-workbench.titlebar-less .split-view-view + .split-view-view .tabs-container > .tab:first-child {
-  margin-left: 0 !important;
+/* ...but when activity-bar is visible and side-bar is hidden...  */
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title,
+/* ...or when there's a split-view with multiple tabs don't move first .tab */
+.monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title {
+  padding-left: 0 !important;
 }
 
 .monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .action-label {
@@ -64,40 +61,41 @@
   right: auto;
 }
 
-/* Allow dragging on the .activitybar... */
-.monaco-workbench.titlebar-less .activitybar {
+/* Allow dragging on the activity-bar... */
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar {
   -webkit-app-region: drag;
 }
 
 /* ...but still allow to click actions without dragging */
-.monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar {
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar .content .monaco-action-bar {
   -webkit-app-region: no-drag;
 }
 
- /* Allow dragging on .sidebar title... */
- .monaco-workbench.titlebar-less .sidebar .composite.title {
+ /* Allow dragging on side-bar title... */
+ .monaco-workbench.titlebar-less:not(.fullscreen) .sidebar .composite.title {
   -webkit-app-region: drag;
 }
-
 /* ...but still allow to click actions without dragging */
-.monaco-workbench.titlebar-less .sidebar .title .title-actions .action-label {
+.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar .title .title-actions .action-label {
   -webkit-app-region: no-drag;
 }
-
-/*
- * Support both .editor-group-container and .one-editor-silo .container for now.
- * See: https://github.com/Microsoft/vscode/commit/bd35d2e15bc2a88aa9ea857cbd6c407d5d225c1a
- * TODO: Remove .one-editor-silo in Fall 2018
- */
 
 /* Allow dragging on tab-bar... */
-.monaco-workbench.titlebar-less .part.editor .content .editor-group-container .title .tabs-container,
-.monaco-workbench.titlebar-less .part.editor .content .one-editor-silo .container .title .tabs-container {
+.monaco-workbench.titlebar-less:not(.fullscreen) .editor-group-container > .title .tabs-container {
   -webkit-app-region: drag;
 }
 
 /* ...but still allow dragging tabs to re-order */
-.monaco-workbench.titlebar-less .part.editor .content .editor-group-container .title .tabs-container .tab,
-.monaco-workbench.titlebar-less .part.editor .content .one-editor-silo .container .title .tabs-container .tab {
+.monaco-workbench.titlebar-less:not(.fullscreen) .editor-group-container > .title .tabs-container .tab {
+  -webkit-app-region: no-drag;
+}
+
+/* When no tab-bar, activity-bar or side-bar is displayed, allow dragging on the first split-view title...  */
+.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .activitybar[aria-hidden="true"] ~ .editor .split-view-container .split-view-view .title {
+  -webkit-app-region: drag;
+}
+
+/* ...but still allow dragging other split-view titles */
+.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .activitybar[aria-hidden="true"] ~ .editor .split-view-container .split-view-view + .split-view-view .title {
   -webkit-app-region: no-drag;
 }
