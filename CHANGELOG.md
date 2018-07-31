@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.4.0
+
+- Correctly handle layout when no side-bar, activity-bar, or tab-bar is
+  displayed
+
 ## Version 1.3.3
 
 - Improve README
