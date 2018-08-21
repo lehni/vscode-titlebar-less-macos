@@ -28,9 +28,9 @@
 /* Move side-bar title when activity-bar is hidden and side-bar is not on the right */
 .monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar:not(.right) > .title,
 /* Move editor title when side-bar is hidden... */
-.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .editor .title,
+.monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title,
 /* ...or when side-bar is on the right... */
-.monaco-workbench.titlebar-less .sidebar.right + .editor .title {
+.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar.right + .editor .title {
   padding-left: var(--traffic-lights-width);
 }
 
