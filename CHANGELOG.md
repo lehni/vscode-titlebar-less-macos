@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.4.1
+
+- Fix fullscreen view when side-bar is displayed right
+
 ## Version 1.4.0
 
 - Correctly handle layout when no side-bar, activity-bar, or tab-bar is
