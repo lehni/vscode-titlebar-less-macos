@@ -28,8 +28,12 @@ const patches = {
       /\.layout=function\((\w+)\)\{(this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.contextViewService\.layout\(\))}/m,
       (all, param, body, browser) => {
         return `.layout=function(${param}){
-          // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom":
-          if ("custom" === this.partService.configurationService.getValue().window.titleBarStyle) {
+          // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom",
+          // and VSCode isn't running as an Extension Development Host:
+          if (
+          	this.partService.configuration.debugId === undefined &&
+          	"custom" === this.partService.configurationService.getValue().window.titleBarStyle
+          ) {
             // Add .titlebar-less to .monaco-workbench, see workbench.main.css
             this.workbenchContainer.classList.add("titlebar-less");
             // Set traffic-lights size, taking zoom-factor into account:
