@@ -80,12 +80,13 @@
   -webkit-app-region: no-drag;
 }
 
-/* Allow dragging on titles with tabs... */
-.monaco-workbench.titlebar-less:not(.fullscreen) .title.tabs.titlebar-less-draggable {
+/* Allow dragging on titles with tabs at the top of the window... */
+.monaco-workbench.titlebar-less:not(.fullscreen) .title.tabs.titlebar-less-draggable .tabs-container {
   -webkit-app-region: drag;
+  -webkit-user-drag: none;
 }
 
 /* ...but still allow dragging the tabs themselves to re-order */
-.monaco-workbench.titlebar-less:not(.fullscreen) .title.tabs.titlebar-less-draggable .tab {
+.monaco-workbench.titlebar-less:not(.fullscreen) .title.tabs.titlebar-less-draggable .tabs-container .tab {
   -webkit-app-region: no-drag;
 }
