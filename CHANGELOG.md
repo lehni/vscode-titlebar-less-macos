@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.5.2
+
+- Disable file dragging on draggable tabs containers
+
 ## Version 1.5.1
 
 - Don't activate extension when VSCode is running as an Extension Development
