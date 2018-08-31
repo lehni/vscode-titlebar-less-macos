@@ -80,22 +80,12 @@
   -webkit-app-region: no-drag;
 }
 
-/* Allow dragging on tab-bar... */
-.monaco-workbench.titlebar-less:not(.fullscreen) .editor-group-container > .title .tabs-container {
+/* Allow dragging on titles with tabs... */
+.monaco-workbench.titlebar-less:not(.fullscreen) .title.tabs.titlebar-less-draggable {
   -webkit-app-region: drag;
 }
 
-/* ...but still allow dragging tabs to re-order */
-.monaco-workbench.titlebar-less:not(.fullscreen) .editor-group-container > .title .tabs-container .tab {
-  -webkit-app-region: no-drag;
-}
-
-/* When no tab-bar, activity-bar or side-bar is displayed, allow dragging on the first split-view title...  */
-.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .activitybar[aria-hidden="true"] ~ .editor .split-view-container .split-view-view .title {
-  -webkit-app-region: drag;
-}
-
-/* ...but still allow dragging other split-view titles */
-.monaco-workbench.titlebar-less.nosidebar:not(.fullscreen) .activitybar[aria-hidden="true"] ~ .editor .split-view-container .split-view-view + .split-view-view .title {
+/* ...but still allow dragging the tabs themselves to re-order */
+.monaco-workbench.titlebar-less:not(.fullscreen) .title.tabs.titlebar-less-draggable .tab {
   -webkit-app-region: no-drag;
 }

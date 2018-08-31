@@ -40,6 +40,29 @@ const patches = {
             var style = document.documentElement.style;
             style.setProperty("--traffic-lights-width", width + "px");
             style.setProperty("--traffic-lights-height", height + "px");
+            // Install handlers on editorGroupService to determine the draggable titles with tabs,
+            // by adding the .titlebar-less-draggable CSS class only to the titles at the top of the window:
+            if (!this.titlebarLessHandlers) {
+              var editorGroupHandler = () => {
+                var titles = Array.from(global.document.querySelectorAll('.title.tabs'));
+                for (const title of titles) {
+                  title.classList.remove('titlebar-less-draggable');
+                }
+                process.nextTick(() => {
+                  for (const title of titles) {
+                    if (!title.getBoundingClientRect().top) {
+                      title.classList.add('titlebar-less-draggable');
+                    }
+                  }
+                });
+              }
+              var handlers = this.titlebarLessHandlers = [];
+              var editorGroupService = this.partService.workbenchLayout.editorGroupService;
+              editorGroupService.onDidLayout(editorGroupHandler ,null, handlers);
+              editorGroupService.onDidAddGroup(editorGroupHandler ,null, handlers);
+              editorGroupService.onDidMoveGroup(editorGroupHandler ,null, handlers);
+              editorGroupService.onDidRemoveGroup(editorGroupHandler ,null, handlers);
+            }
           }
           ${body}
         }`
