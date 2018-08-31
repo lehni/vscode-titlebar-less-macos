@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.5.1
+
+- Don't activate extension when VSCode is running as an Extension Development
+  Host
+
 ## Version 1.5.0
 
 - Improve handling of draggable tab bars
