@@ -43,7 +43,7 @@ const patches = {
             // Install handlers on editorGroupService to determine the draggable titles with tabs,
             // by adding the .titlebar-less-draggable CSS class only to the titles at the top of the window:
             if (!this.titlebarLessHandlers) {
-              var editorGroupHandler = () => {
+              var handleDraggableTitles = () => {
                 var titles = Array.from(global.document.querySelectorAll('.title.tabs'));
                 for (const title of titles) {
                   title.classList.remove('titlebar-less-draggable');
@@ -58,10 +58,10 @@ const patches = {
               }
               var handlers = this.titlebarLessHandlers = [];
               var editorGroupService = this.partService.workbenchLayout.editorGroupService;
-              editorGroupService.onDidLayout(editorGroupHandler ,null, handlers);
-              editorGroupService.onDidAddGroup(editorGroupHandler ,null, handlers);
-              editorGroupService.onDidMoveGroup(editorGroupHandler ,null, handlers);
-              editorGroupService.onDidRemoveGroup(editorGroupHandler ,null, handlers);
+              editorGroupService.onDidLayout(handleDraggableTitles ,null, handlers);
+              editorGroupService.onDidAddGroup(handleDraggableTitles ,null, handlers);
+              editorGroupService.onDidMoveGroup(handleDraggableTitles ,null, handlers);
+              editorGroupService.onDidRemoveGroup(handleDraggableTitles ,null, handlers);
             }
           }
           ${body}
