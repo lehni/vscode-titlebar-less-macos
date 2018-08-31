@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.5.0
+
+- Improve handling of draggable tab bars
+
 ## Version 1.4.1
 
 - Fix fullscreen view when side-bar is displayed right
