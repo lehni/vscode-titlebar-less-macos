@@ -18,8 +18,8 @@ const patches = {
   'vs/workbench/workbench.main.js': [
     // Never show the TITLEBAR_PART when "window.titleBarStyle" is "custom" 
     [
-      'TITLEBAR_PART:return"custom"===this.getCustomTitleBarStyle()',
-      'TITLEBAR_PART:return false'
+      /return"custom"===this\.getCustomTitleBarStyle\(\)(&&\(!\w\.isFullscreen\(\))/,
+      'return false$1'
     ],
     // Handle setting of traffic-lights size and .titlebar-less class on .monaco-workbench
     [
