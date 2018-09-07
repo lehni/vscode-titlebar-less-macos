@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.6.0
+
+- Adjust patch for VSCode v1.28.0 (Insiders)
+
 ## Version 1.5.2
 
 - Disable file dragging on draggable tabs containers
