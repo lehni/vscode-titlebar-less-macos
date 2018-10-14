@@ -48,7 +48,7 @@ const patches = {
             // by adding the .titlebar-less-draggable CSS class only to the titles at the top of the window:
             if (!this.titlebarLessHandlers) {
               var handleDraggableTitles = () => process.nextTick(() => {
-                for (const title of Array.from(global.document.querySelectorAll('.title.tabs'))) {
+                for (const title of Array.from(global.document.querySelectorAll('.editor .title'))) {
                   title.classList.toggle('titlebar-less-draggable', !title.getBoundingClientRect().top);
                 }
               });

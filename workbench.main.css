@@ -25,19 +25,27 @@
   margin-top: var(--traffic-lights-height); 
 }
 
-/* Move side-bar title when activity-bar is hidden and side-bar is not on the right */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar:not(.right) > .title,
+/* NOTE: whenever `.editor. title` is targeted below, two filters are used:
+ * - `.title:not(.tabs)`           -> When tabs are disabled, move title itself
+ * - `.title.tabs .tabs-container` -> When tabs are enabled, move tabs only, not optional breadcrumbs
+ */
 /* Move editor title when side-bar is hidden... */
-.monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title,
+.monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title:not(.tabs),
+.monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title.tabs .tabs-container,
 /* ...or when side-bar is on the right... */
-.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar.right + .editor .title {
+.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar.right + .editor .title:not(.tabs),
+.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar.right + .editor .title.tabs .tabs-container,
+/* ...also move side-bar title when activity-bar is hidden and side-bar is not on the right */
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar:not(.right) > .title {
   padding-left: var(--traffic-lights-width);
 }
 
 /* ...but when activity-bar is visible and side-bar is hidden...  */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title,
-/* ...or when there's a split-view with multiple tabs don't move first .tab */
-.monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title {
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title:not(.tabs),
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title.tabs .tabs-container,
+/* ...or when there's a split-view with multiple tabs, don't move .tabs-container */
+.monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title:not(.tabs),
+.monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title .tabs-container {
   padding-left: 0 !important;
 }
 
@@ -81,12 +89,13 @@
 }
 
 /* Allow dragging on titles with tabs at the top of the window... */
-.monaco-workbench.titlebar-less:not(.fullscreen) .title.tabs.titlebar-less-draggable .tabs-container {
+.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title:not(.tabs),
+.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title.tabs .tabs-container {
   -webkit-app-region: drag;
   -webkit-user-drag: none;
 }
 
 /* ...but still allow dragging the tabs themselves to re-order */
-.monaco-workbench.titlebar-less:not(.fullscreen) .title.tabs.titlebar-less-draggable .tabs-container .tab {
+.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title.tabs .tabs-container .tab {
   -webkit-app-region: no-drag;
 }
