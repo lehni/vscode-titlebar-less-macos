@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.6.1
+
+- Improve positioning of breadcrumbs under tabs (#18)
+
 ## Version 1.6.0
 
 - Adjust patch for VSCode v1.28.0 (Insiders)
