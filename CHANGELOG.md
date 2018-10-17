@@ -2,7 +2,7 @@
 
 ## Version 1.6.2
 
-- Adjust patch for latest 1.29.0-insider
+- Adjust patch for latest VSCode v1.29.0 (Insiders)
 
 ## Version 1.6.1
 
