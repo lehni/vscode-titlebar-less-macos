@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.6.2
+
+- Adjust patch for latest 1.29.0-insider
+
 ## Version 1.6.1
 
 - Improve positioning of breadcrumbs under tabs (#18)
