@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.6.3
+
+- Improve breadcrumb styling to not affect tabs scrolling
+
 ## Version 1.6.2
 
 - Adjust patch for latest VSCode v1.29.0 (Insiders)
