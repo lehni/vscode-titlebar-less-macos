@@ -30,23 +30,30 @@
  * - `.title.tabs .tabs-container` -> When tabs are enabled, move tabs only, not optional breadcrumbs
  */
 /* Move editor title when side-bar is hidden... */
-.monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title:not(.tabs),
-.monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title.tabs .tabs-container,
+.monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title,
 /* ...or when side-bar is on the right... */
-.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar.right + .editor .title:not(.tabs),
-.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar.right + .editor .title.tabs .tabs-container,
-/* ...also move side-bar title when activity-bar is hidden and side-bar is not on the right */
+.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar.right + .editor .title,
+/* ...also move side-bar title when activity-bar is hidden and side-bar is not on the right... */
 .monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar:not(.right) > .title {
   padding-left: var(--traffic-lights-width);
 }
+/* ... and for all the selectors above, move nested .tabs-breadcrumbs back by the same amount. */
+.monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title .tabs-breadcrumbs,
+.monaco-workbench.titlebar-less:not(.fullscreen) .sidebar.right + .editor .title .tabs-breadcrumbs,
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar[aria-hidden="true"] + .sidebar:not(.right) > .title .tabs-breadcrumbs {
+  margin-left: calc(-1 * var(--traffic-lights-width));
+}
 
 /* ...but when activity-bar is visible and side-bar is hidden...  */
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title:not(.tabs),
-.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title.tabs .tabs-container,
-/* ...or when there's a split-view with multiple tabs, don't move .tabs-container */
-.monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title:not(.tabs),
-.monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title .tabs-container {
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title,
+/* ...or when there's a split-view with multiple tabs, don't move .tabs-container... */
+.monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title {
   padding-left: 0 !important;
+}
+/* ... and for all the selectors above, clearn moving of nested .tabs-breadcrumbs. */
+.monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title .tabs-breadcrumbs,
+.monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title .tabs-breadcrumbs {
+  margin-left: 0 !important;
 }
 
 .monaco-workbench.titlebar-less .activitybar .content .monaco-action-bar .action-label {
@@ -83,19 +90,18 @@
  .monaco-workbench.titlebar-less:not(.fullscreen) .sidebar .composite.title {
   -webkit-app-region: drag;
 }
-/* ...but still allow to click actions without dragging */
+/* ...but still allow to click actions without dragging. */
 .monaco-workbench.titlebar-less:not(.fullscreen) .sidebar .title .title-actions .action-label {
   -webkit-app-region: no-drag;
 }
 
 /* Allow dragging on titles with tabs at the top of the window... */
-.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title:not(.tabs),
-.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title.tabs .tabs-container {
+.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title {
   -webkit-app-region: drag;
   -webkit-user-drag: none;
 }
 
-/* ...but still allow dragging the tabs themselves to re-order */
-.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title.tabs .tabs-container .tab {
+/* ...but still allow dragging the tabs themselves to re-order. */
+.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title .tab {
   -webkit-app-region: no-drag;
 }
