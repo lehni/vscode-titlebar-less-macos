@@ -25,9 +25,7 @@ const patches = {
     [
       // Patch the full layout function in layout.ts, and parse it to retrieve
       // its parameter and the object on which to call `getZoomFactor()`:
-      /\.layout=function\((\w+)\)\{(this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.contextViewService\.layout\(\)(?:,this\.saveStateScheduler\.schedule\(\)|))}/m,
-      // TODO: Switch to this shorter version once 1.29.0 has been out for a while:
-      // /\.layout=function\((\w+)\)\{(this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.saveStateScheduler\.schedule\(\))}/m,
+      /\.layout=function\((\w+)\)\{(.*this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.contextViewService\.layout\(\))}/m,
       (all, param, body, browser) => {
         return `.layout=function(${param}){
           // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom",
