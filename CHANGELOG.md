@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 1.7.0
+
+- Fix random drag failures on tabs
+- Adjust patch for latest VSCode Insiders v1.30.0
+
 ## Version 1.6.4
 
 - Adjust patch for latest VSCode Insiders v1.29.0
