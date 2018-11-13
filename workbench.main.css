@@ -50,7 +50,7 @@
 .monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title {
   padding-left: 0 !important;
 }
-/* ... and for all the selectors above, clearn moving of nested .tabs-breadcrumbs. */
+/* ... and for all the selectors above, clear moving of nested .tabs-breadcrumbs. */
 .monaco-workbench.titlebar-less:not(.fullscreen) .activitybar:not([aria-hidden="true"]) + .sidebar:not(.right) + .editor .title .tabs-breadcrumbs,
 .monaco-workbench.titlebar-less .split-view-container .split-view-view + .split-view-view .title .tabs-breadcrumbs {
   margin-left: 0 !important;
@@ -102,6 +102,7 @@
 }
 
 /* ...but still allow dragging the tabs themselves to re-order. */
+.monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title .tablist,
 .monaco-workbench.titlebar-less:not(.fullscreen) .titlebar-less-draggable.title .tab {
   -webkit-app-region: no-drag;
 }
