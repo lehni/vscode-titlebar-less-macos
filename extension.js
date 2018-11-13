@@ -25,7 +25,13 @@ const patches = {
     [
       // Patch the full layout function in layout.ts, and parse it to retrieve
       // its parameter and the object on which to call `getZoomFactor()`:
-      /\.layout=function\((\w+)\)\{(.*this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.contextViewService\.layout\(\))}/m,
+      // Use `[^}]*` at the beginning and end of the body, to match any code
+      // that doesn't involve any chaning nesting. This is required to loosely
+      // match smaller changes in different version of VSCode, as well as random
+      // line-breaks inserted by the minifier.
+      // Also, `this\.contextViewService\.layout\(\))` can't be matched anymore,
+      // since that's now called further down in workbench.main.js too.
+      /\.layout=function\((\w+)\)\{([^}]*this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.parts\.activitybar\.layout\(\w+\)[^}]*)}/m,
       (all, param, body, browser) => {
         return `.layout=function(${param}){
           // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom",
