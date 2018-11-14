@@ -65,9 +65,9 @@ these lines:
 "window.nativeTabs": false,
  ```
 
-## Installing on macOS 10.14 Mojave
+## Applying the Patches as Root
 
-Due to security restrictions on macOS 10.14, VSCode needs to run as root
+Due to security restrictions on some systems, VSCode may need to run as root
 in order to be able to apply the patches. To do so, open the `Terminal.app` and
 run:
 

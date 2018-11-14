@@ -25,10 +25,6 @@
   margin-top: var(--traffic-lights-height); 
 }
 
-/* NOTE: whenever `.editor. title` is targeted below, two filters are used:
- * - `.title:not(.tabs)`           -> When tabs are disabled, move title itself
- * - `.title.tabs .tabs-container` -> When tabs are enabled, move tabs only, not optional breadcrumbs
- */
 /* Move editor title when side-bar is hidden... */
 .monaco-workbench.titlebar-less:not(.fullscreen).nosidebar .editor .title,
 /* ...or when side-bar is on the right... */
