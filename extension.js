@@ -60,7 +60,9 @@ const patches = {
                 }
               });
               var handlers = this.titlebarLessHandlers = [];
-              var editorGroupService = this.partService.workbenchLayout.editorGroupService;
+              // VSCode 1.31.0 moved editorGroupService directly to partService.
+              // TODO: Remove fallback once lower versions are in a distant past.
+              var editorGroupService = this.partService.editorGroupService || this.partService.workbenchLayout.editorGroupService;
               editorGroupService.onDidLayout(handleDraggableTitles ,null, handlers);
               editorGroupService.onDidAddGroup(handleDraggableTitles ,null, handlers);
               editorGroupService.onDidMoveGroup(handleDraggableTitles ,null, handlers);
