@@ -18,7 +18,7 @@ const patches = {
   'vs/workbench/workbench.main.js': [
     // Never show the TITLEBAR_PART when "window.titleBarStyle" is "custom" 
     [
-      // TODO: Replace `(?:"custom"===this\.getCustomTitleBarStyle\(\)|…)` part with `…` once VSCode v1.30.0 is released
+      // TODO: Replace `(?:"custom"===this\.getCustomTitleBarStyle\(\)|…)` part with `…` once VSCode v1.29.0 is in a distant past
       /return(?:"custom"===this\.getCustomTitleBarStyle\(\)|!!this\.useCustomTitleBarStyle\(\))(&&\(!\w\.isFullscreen\(\))/,
       'return false$1'
     ],
@@ -32,9 +32,10 @@ const patches = {
       // line-breaks inserted by the minifier.
       // Also, `this\.contextViewService\.layout\(\))` can't be matched anymore,
       // since that's now called further down in workbench.main.js too.
-      /\.layout=function\((\w+)\)\{([^}]*this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.parts\.activitybar\.layout\(\w+\)[^}]*)}/m,
-      (all, param, body, browser) => {
-        return `.layout=function(${param}){
+      // TODO: Replace `(\.layout=function\(\w+\)\{|layout\(\w+\)\{)` with `(layout\(\w+\)\{)` once VSCode v1.31.0 is in a distant past
+      /(\.layout=function\(\w+\)\{|layout\(\w+\)\{)([^}]*this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.parts\.activitybar\.layout\(\w+\)[^}]*)}/m,
+      (all, func, body, browser) => {
+        return `${func}
           // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom",
           // and VSCode isn't running as an Extension Development Host:
           if (
