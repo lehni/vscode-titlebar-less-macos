@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.8.1
+
+- Adjust patch for latest VSCode Insiders v1.32.0
+
 ## Version 1.8.0
 
 - Fix bug that causes an empty application window in VSCode v1.31.0
