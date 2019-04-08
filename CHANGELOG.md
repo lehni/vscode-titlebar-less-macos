@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.9.0
+
+- Adjust patches for VSCode v1.33.0
+
 ## Version 1.8.1
 
 - Adjust patch for latest VSCode Insiders v1.32.0
