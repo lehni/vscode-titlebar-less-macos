@@ -72,8 +72,8 @@ const patches = {
           } else if (
             // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom",
             // and VSCode isn't running as an Extension Development Host:
-          	!environmentService.isExtensionDevelopment &&
-          	"custom" === configurationService.getValue().window.titleBarStyle
+            !environmentService.isExtensionDevelopment &&
+            "custom" === configurationService.getValue().window.titleBarStyle
           ) {
             // Add .titlebar-less to .monaco-workbench, see workbench.main.css
             this.workbenchContainer.classList.add("titlebar-less");
