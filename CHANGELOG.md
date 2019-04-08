@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.9.1
+
+- Make new patch adjustments actually for VSCode v1.33.0, not just v1.34.0 🤦‍
+
 ## Version 1.9.0
 
 - Adjust patches for VSCode v1.33.0
