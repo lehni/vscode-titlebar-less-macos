@@ -21,7 +21,7 @@ const patches = {
       new RegExp([
         // TODO: Remove support for older versions once they are in a distant past
         // 1.33.0 <= v
-        'return"native"!==_\\.getTitleBarStyle\\(this\\.configurationService,this\\.environmentService\\)(&&\\(!this\\.state\\.fullscreen)',
+        'return"native"!==\\w\\.getTitleBarStyle\\(this\\.configurationService,this\\.environmentService\\)(&&\\(!this\\.state\\.fullscreen)',
         // 1.30.0 <= v < 1.33.0 
         'return!!this\\.useCustomTitleBarStyle\\(\\)(&&\\(!\\w\\.isFullscreen\\(\\))',
         //           v < 1.30.0
