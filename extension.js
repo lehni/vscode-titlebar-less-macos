@@ -18,29 +18,62 @@ const patches = {
   'vs/workbench/workbench.main.js': [
     // Never show the TITLEBAR_PART when "window.titleBarStyle" is "custom" 
     [
-      // TODO: Replace `(?:"custom"===this\.getCustomTitleBarStyle\(\)|…)` part with `…` once VSCode v1.29.0 is in a distant past
-      /return(?:"custom"===this\.getCustomTitleBarStyle\(\)|!!this\.useCustomTitleBarStyle\(\))(&&\(!\w\.isFullscreen\(\))/,
-      'return false$1'
+      new RegExp([
+        // TODO: Remove support for older versions once they are in a distant past
+        // 1.33.0 <= v
+        'return"native"!==_\\.getTitleBarStyle\\(this\\.configurationService,this\\.environmentService\\)(&&\\(!this\\.state\\.fullscreen)',
+        // 1.30.0 <= v < 1.33.0 
+        'return!!this\\.useCustomTitleBarStyle\\(\\)(&&\\(!\\w\\.isFullscreen\\(\\))',
+        //           v < 1.30.0
+        'return"custom"===this\\.getCustomTitleBarStyle\\(\\)(&&\\(!\\w\\.isFullscreen\\(\\))'
+       ].join('|')),
+      'return false$1$2$3'
     ],
     // Handle setting of traffic-lights size and .titlebar-less class on .monaco-workbench
     [
       // Patch the full layout function in layout.ts, and parse it to retrieve
       // its parameter and the object on which to call `getZoomFactor()`:
       // Use `[^}]*` at the beginning and end of the body, to match any code
-      // that doesn't involve any chaning nesting. This is required to loosely
+      // that doesn't involve any changing nesting. This is required to loosely
       // match smaller changes in different version of VSCode, as well as random
       // line-breaks inserted by the minifier.
       // Also, `this\.contextViewService\.layout\(\))` can't be matched anymore,
       // since that's now called further down in workbench.main.js too.
       // TODO: Replace `(\.layout=function\(\w+\)\{|layout\(\w+\)\{)` with `(layout\(\w+\)\{)` once VSCode v1.31.0 is in a distant past
-      /(\.layout=function\(\w+\)\{|layout\(\w+\)\{)([^}]*this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.parts\.activitybar\.layout\(\w+\)[^}]*)}/m,
+      /(\.layout=function\(\w+\)\{|layout\(\w+\)\{)([^}]*this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.parts\.activitybar\.layout\([^)]*\)[^}]*)}/m,
       (all, func, body, browser) => {
         return `${func}
-          // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom",
-          // and VSCode isn't running as an Extension Development Host:
-          if (
-          	this.partService.configuration.debugId === undefined &&
-          	"custom" === this.partService.configurationService.getValue().window.titleBarStyle
+          var layoutService = (
+            // TODO: Remove support for older versions once they are in a distant past
+            // 1.33.0 <= v
+            this.layoutService ||
+            //           v < 1.33.0
+            this.partService
+          )
+          var editorGroupService = layoutService && (
+            // TODO: Remove support for older versions once they are in a distant past
+            // 1.33.0 <= v
+            this.editorGroupService ||
+            // 1.31.0 <= v < 1.33.0 
+            layoutService.editorGroupService ||
+            //           v < 1.31.0
+            layoutService.workbenchLayout && layoutService.workbenchLayout.editorGroupService
+          );
+          var configurationService = layoutService && layoutService.configurationService;
+          var environmentService = layoutService && layoutService.environmentService;
+          if (!layoutService) {
+            console.error('Unable to retrieve layoutService');
+          } else if (!editorGroupService) {
+            console.error('Unable to retrieve editorGroupService');
+          } else if (!configurationService) {
+            console.error('Unable to retrieve configurationService');
+          } else if (!environmentService) {
+            console.error('Unable to retrieve environmentService');
+          } else if (
+            // Only activate titlebar-less mode if "window.titleBarStyle" is set to "custom",
+            // and VSCode isn't running as an Extension Development Host:
+          	!environmentService.isExtensionDevelopment &&
+          	"custom" === configurationService.getValue().window.titleBarStyle
           ) {
             // Add .titlebar-less to .monaco-workbench, see workbench.main.css
             this.workbenchContainer.classList.add("titlebar-less");
@@ -61,9 +94,6 @@ const patches = {
                 }
               });
               var handlers = this.titlebarLessHandlers = [];
-              // VSCode 1.31.0 moved editorGroupService directly to partService.
-              // TODO: Remove fallback once lower versions are in a distant past.
-              var editorGroupService = this.partService.editorGroupService || this.partService.workbenchLayout.editorGroupService;
               editorGroupService.onDidLayout(handleDraggableTitles ,null, handlers);
               editorGroupService.onDidAddGroup(handleDraggableTitles ,null, handlers);
               editorGroupService.onDidMoveGroup(handleDraggableTitles ,null, handlers);
@@ -138,6 +168,8 @@ function applyPatches(enable) {
           if (patched !== content) {
             content = patched
             found++
+          } else {
+            console.error(`Unable to apply patch: ${find}`)
           }
         }
         if (found === amount) {
