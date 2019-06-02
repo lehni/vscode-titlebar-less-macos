@@ -63,6 +63,7 @@ these lines:
 ```json
 "window.titleBarStyle": "custom",
 "window.nativeTabs": false,
+"window.nativeFullScreen": false,
  ```
 
 ## Applying the Patches as Root
