@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 1.10.0
+
+- Add setting to toggle the traffic light buttons.
+
 ## Version 1.9.1
 
 - Make new patch adjustments actually for VSCode v1.33.0, not just v1.34.0 🤦‍

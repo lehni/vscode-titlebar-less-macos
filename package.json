@@ -36,6 +36,16 @@
     "onCommand:titlebarLess.disable"
   ],
   "contributes": {
+    "configuration": {
+      "title": "Titlebar-Less",
+      "properties": {
+        "titlebarLess.showTrafficLights": {
+          "type": "boolean",
+          "default": true,
+          "description": "Toggles the macOS window control buttons. (requires restart)"
+        }
+      }
+    },
     "commands": [
       {
         "command": "titlebarLess.enable",
