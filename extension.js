@@ -19,12 +19,6 @@ const patches = {
         ? `.titleBarStyle="${version < 1.26 ? 'hidden-inset' : 'hiddenInset'}",`
         : '.frame=false,'
     ]
-    // experimental:
-    // [
-    //   new RegExp('(\\w+)(.titleBarStyle="hidden",)'),
-    //   (match, opt, assignment) =>
-    //       `${opt}.titleBarStyle="customButtonsOnHover",${opt}.frame=false,`
-    // ],
   ],
   'vs/workbench/workbench.main.js': [
     // Never show the TITLEBAR_PART when "window.titleBarStyle" is "custom" 
