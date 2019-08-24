@@ -7,12 +7,17 @@ const fsOptions = { encoding: 'utf8' }
 
 const version = parseFloat(vscode.version)
 
+const { showTrafficLights } = vscode.workspace.getConfiguration('titlebarLess')
+
 const patches = {
   'vs/code/electron-main/main.js': [
-    // Change the Electron titleBarStyle to "hidden-inset"
+    // Override the Electron BrowserWindow options:
+    // https://electronjs.org/docs/api/frameless-window
     [
       '.titleBarStyle="hidden",',
-      `.titleBarStyle="${version < 1.26 ? 'hidden-inset' : 'hiddenInset' }",`
+      showTrafficLights
+        ? `.titleBarStyle="${version < 1.26 ? 'hidden-inset' : 'hiddenInset'}",`
+        : '.frame=false,'
     ]
   ],
   'vs/workbench/workbench.main.js': [
@@ -77,11 +82,16 @@ const patches = {
           ) {
             // Add .titlebar-less to .monaco-workbench, see workbench.main.css
             this.workbenchContainer.classList.add("titlebar-less");
-            // Set traffic-lights size, taking zoom-factor into account:
-            var factor = ${browser}.getZoomFactor();
-            var width = 78 / factor;
-            var height = 35 / factor;
-            this.partLayoutInfo.activitybar.width = width;
+            ${showTrafficLights
+              ? `// Set traffic-lights size, taking zoom-factor into account:
+                 var factor = ${browser}.getZoomFactor();
+                 var width = 78 / factor;
+                 var height = 35 / factor;
+                 this.partLayoutInfo.activitybar.width = width;`
+          
+              : `var width = 0;
+                 var height = 0;`
+            }
             var style = document.documentElement.style;
             style.setProperty("--traffic-lights-width", width + "px");
             style.setProperty("--traffic-lights-height", height + "px");
