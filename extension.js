@@ -20,7 +20,7 @@ const patches = {
         : '.frame=false,'
     ]
   ],
-  'vs/workbench/workbench.main.js': [
+  'vs/workbench/workbench.desktop.main.js': [
     // Never show the TITLEBAR_PART when "window.titleBarStyle" is "custom" 
     [
       new RegExp([
@@ -43,7 +43,7 @@ const patches = {
       // match smaller changes in different version of VSCode, as well as random
       // line-breaks inserted by the minifier.
       // Also, `this\.contextViewService\.layout\(\))` can't be matched anymore,
-      // since that's now called further down in workbench.main.js too.
+      // since that's now called further down in workbench.desktop.main.js too.
       // TODO: Replace `(\.layout=function\(\w+\)\{|layout\(\w+\)\{)` with `(layout\(\w+\)\{)` once VSCode v1.31.0 is in a distant past
       /(\.layout=function\(\w+\)\{|layout\(\w+\)\{)([^}]*this\.workbenchSize=[\s\S]*(\w+)\.getZoomFactor\(\)[\s\S]*this\.parts\.activitybar\.layout\([^)]*\)[^}]*)}/m,
       (all, func, body, browser) => {
@@ -80,7 +80,7 @@ const patches = {
             !environmentService.isExtensionDevelopment &&
             "custom" === configurationService.getValue().window.titleBarStyle
           ) {
-            // Add .titlebar-less to .monaco-workbench, see workbench.main.css
+            // Add .titlebar-less to .monaco-workbench, see workbench.desktop.main.css
             this.workbenchContainer.classList.add("titlebar-less");
             ${showTrafficLights
               ? `// Set traffic-lights size, taking zoom-factor into account:
@@ -115,11 +115,11 @@ const patches = {
       }
     ]
   ],
-  'vs/workbench/workbench.main.css': [
+  'vs/workbench/workbench.desktop.main.css': [
     // Add our CSS modifications to the end of the main file
     [
       /$/g, // Append to the end of the file
-      readFile('workbench.main.css')
+      readFile('workbench.desktop.main.css')
     ]
   ]
 }
