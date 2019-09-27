@@ -2,6 +2,7 @@
 
 ## Version 1.10.0
 
+- Adjust patch for VSCode 1.38.0
 - Add setting to toggle the traffic light buttons.
 
 ## Version 1.9.1
