@@ -2,7 +2,8 @@
 
 ## Version 1.10.0
 
-- Add setting to toggle the traffic light buttons.
+- Deprecate extension in favor of [Customize
+UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui)
 
 ## Version 1.9.1
 
