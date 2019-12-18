@@ -1,3 +1,20 @@
+# Deprecation Notice
+
+This extension does not work on VSCode 1.40 or newer, and has therefore been deprecated.
+
+You may use [Customize
+UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui)
+instead, which you can configure to achieve the same UI style by adding these
+settings in your `settings.json` file:
+
+```json
+{
+  "window.titleBarStyle": "native",
+  "customizeUI.titleBar": "inline",
+  "customizeUI.activityBar": "wide"
+}
+```
+
 # Titlebar-less VSCode for macOS
 
 <p align="center">
