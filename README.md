@@ -11,7 +11,10 @@ settings in your `settings.json` file:
 {
   "window.titleBarStyle": "native",
   "customizeUI.titleBar": "inline",
-  "customizeUI.activityBar": "wide"
+  "customizeUI.activityBar": "wide",
+  "customizeUI.stylesheet": {
+    ".monaco-workbench .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .badge .badge-content": "left: calc(50% + 0.5em); right: auto;"
+  },
 }
 ```
 

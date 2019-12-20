@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 1.10.1
+
+- Improve instructions for replacement with [Customize
+  UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui)
+  extension
+
 ## Version 1.10.0
 
 - Deprecate extension in favor of [Customize
