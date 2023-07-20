@@ -3,16 +3,60 @@
 This extension does not work on VSCode 1.40 or newer, and has therefore been
 deprecated.
 
-You may use [Customize
-UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui)
+You may use [Apc Customize
+UI++](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
 instead, which you can configure to achieve the same UI style by adding these
-settings in your `settings.json` file:
+settings in your `settings.json` file, see [#52](https://github.com/drcika/apc-extension/issues/52):
+
+```json
+{
+    "window.titleBarStyle": "native",
+    "apc.electron": {
+        "titleBarStyle": "hiddenInset",
+    },
+    "apc.header": {
+      "height": 37
+    },
+    "apc.sidebar.titlebar": {
+      "height": 37
+    },
+    "apc.activityBar": {
+        "size": 77
+    },
+    "apc.stylesheet": {
+        ".custom-sidebar-titlebar .sidebar .composite.title": "padding-left: 0;",
+        // Make room for the traffic lights.
+        ".custom-activitybar div.monaco-workbench div.activitybar > div.content": "margin-top: var(--titlebar-height);",
+        // Reset strange APC .activitybar styling back to VSCode defaults.
+        ".custom-activitybar div.monaco-workbench div.activitybar > div.content div.monaco-action-bar ul.actions-container li.action-item": "margin-top: 0 !important;",
+        ".custom-activitybar div.monaco-workbench div.activitybar > div.content div.monaco-action-bar ul.actions-container li.action-item a.action-label": "width: 48px; height: 48px; font-size: 24px; margin: 0 auto; -webkit-mask-size: 1em;",
+        ".custom-activitybar div.monaco-workbench div.activitybar > div.content div.monaco-action-bar ul.actions-container li.action-item .badge div.badge-content": "top: 24px; right: 8px;",
+        // Don't indent the statusbar items.
+        ".monaco-workbench .part.statusbar>.items-container>.statusbar-item.left.first-visible-item": "padding-left: 0;",
+        // Show the host button, and make it as wide as the .activitybar.
+        ".statusbar #status\\.host": "display: block !important; width: calc(var(--activity-bar-action-size) - 1px); background: #555 !important;",
+        ".statusbar #status\\.host .codicon": "margin: 0 auto;",
+    }
+}
+```
+
+Before `Apc Customize UI++`, [Customize
+UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui) was
+recommended as a replacement, which you could configure to achieve the same UI
+style by adding these settings in your `settings.json` file:
 
 ```json
 {
   "window.titleBarStyle": "native",
   "customizeUI.titleBar": "inline",
-  "customizeUI.activityBar": "wide"
+  "customizeUI.activityBar": "wide",
+  "customizeUI.stylesheet": {
+    // Center action items in .activitybar.
+    ".monaco-workbench .activitybar > .content :not(.monaco-menu) > .monaco-action-bar .action-item .action-label": "margin: 0 auto;",
+    // Show the host button, and make it as wide as the .activitybar.
+    ".statusbar #status\\.host": "width: 76px; background: #555 !important;",
+    ".statusbar #status\\.host .codicon": "margin: 0 auto;"
+  }
 }
 ```
 
