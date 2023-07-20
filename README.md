@@ -8,7 +8,7 @@ UI++](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
 instead, which you can configure to achieve the same UI style by adding these
 settings in your `settings.json` file, see [#52](https://github.com/drcika/apc-extension/issues/52):
 
-```json
+```jsonc
 {
     "window.titleBarStyle": "native",
     "apc.electron": {
@@ -45,7 +45,7 @@ UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui) was
 recommended as a replacement, which you could configure to achieve the same UI
 style by adding these settings in your `settings.json` file:
 
-```json
+```jsonc
 {
   "window.titleBarStyle": "native",
   "customizeUI.titleBar": "inline",
