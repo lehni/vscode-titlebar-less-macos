@@ -1,5 +1,21 @@
 # Change Log
 
+## Version 1.10.3
+
+- Add instructions for replacement with [Apc Customize
+UI++](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
+  extension
+
+## Version 1.10.2
+
+- Remove stylesheet tweak again, now that Customize UI integrates it
+   
+## Version 1.10.1
+
+- Improve instructions for replacement with [Customize
+  UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui)
+  extension
+
 ## Version 1.10.0
 
 - Deprecate extension in favor of [Customize
