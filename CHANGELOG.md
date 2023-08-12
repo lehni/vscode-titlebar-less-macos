@@ -1,5 +1,11 @@
 # Change Log
 
+## Version 1.10.4
+
+- Update instructions for [Apc Customize
+UI++](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
+  extension
+
 ## Version 1.10.3
 
 - Add instructions for replacement with [Apc Customize
