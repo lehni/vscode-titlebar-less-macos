@@ -11,6 +11,8 @@ settings in your `settings.json` file, see [#52](https://github.com/drcika/apc-e
 ```jsonc
 {
   "window.titleBarStyle": "native",
+  "window.customTitleBarVisibility": "never",
+  "window.density.editorTabHeight": "compact",
   "apc.electron": {
     "titleBarStyle": "hiddenInset",
   },
