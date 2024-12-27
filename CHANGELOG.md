@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 1.10.5
+
+- Update instructions for [Custom UI
+  Style](https://marketplace.visualstudio.com/items?itemName=subframe7536.custom-ui-style)
+  extension
+
+
 ## Version 1.10.4
 
 - Update instructions for [Apc Customize
@@ -15,7 +22,7 @@ UI++](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
 ## Version 1.10.2
 
 - Remove stylesheet tweak again, now that Customize UI integrates it
-   
+
 ## Version 1.10.1
 
 - Improve instructions for replacement with [Customize
