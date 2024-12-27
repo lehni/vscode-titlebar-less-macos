@@ -1,12 +1,176 @@
-# Deprecation Notice
+
+# Titlebar-less VSCode for macOS
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/preview.png" alt="Preview">
+</p>
+
+Originally extension, and now a recommended combination of third party
+extensions and settings, designed to hide the titlebar on VSCode for macOS, and
+inline the traffic lights (= window controls).
+
+## Deprecation Notice
 
 This extension does not work on VSCode 1.40 or newer, and has therefore been
 deprecated.
 
-You may use [Apc Customize
-UI++](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
+## Recommended Replacement
+
+### Custom UI Style
+
+As of VSCode 1.94, you may use [Custom UI Style](https://marketplace.visualstudio.com/items?itemName=subframe7536.custom-ui-style)
 instead, which you can configure to achieve the same UI style by adding these
-settings in your `settings.json` file, see [#52](https://github.com/drcika/apc-extension/issues/52):
+settings in your `settings.json` file, see [Issue #16](https://github.com/subframe7536/vscode-custom-ui-style/issues/16):
+
+```jsonc
+{
+  "window.titleBarStyle": "native",
+  "window.customTitleBarVisibility": "never",
+  "custom-ui-style.electron": {
+    "titleBarStyle": "hiddenInset"
+  },
+  "custom-ui-style.stylesheet": {
+    ".monaco-workbench": {
+      "--activitybar-width": "78px",
+      "--titlebar-height": "37px",
+
+      // Titlebar
+      ".part.sidebar.left .composite.title": {
+        "&, .title-actions, .global-actions, .monaco-toolbar": {
+          "height": "var(--titlebar-height)"
+        },
+
+        ".title-label": {
+          "line-height": "var(--titlebar-height)"
+        }
+      },
+  
+      // Tabs
+      ".title.tabs": {
+        "--editor-group-tab-height": "var(--titlebar-height) !important",
+      },
+
+      // Wide activity bar
+      ".split-view-view:has(> .part.activitybar.left)": {
+        "&, .part.activitybar.left, .content": {          
+          "min-width": "var(--activitybar-width)",
+        },
+
+        // Make the split-view after the wide activity bar smaller.
+        // Also handle the situation where the sidebar is hidden,
+        // in which case the editor itself needs to shrink / auto-size.
+        "& + .split-view-view.visible, & + .split-view-view:not(.visible) + .split-view-view.visible": {
+          "--offset": "calc(var(--activitybar-width) - 48px)",
+          "margin-left": "var(--offset)",
+
+          "> *:first-child": {
+            "width": "auto",
+            "margin-right": "var(--offset)",
+
+            // Auto-size the editor when the sidebar is hidden.
+            ".content": {
+              "&, .split-view-view": {
+                "&, .monaco-editor": {
+                  "&, .overflow-guard, .overlayWidgets" : {
+                    "&, .monaco-scrollable-element, .sticky-widget": {
+                      "width": "unset !important",
+                      "left": "0",
+                      "right": "0"
+                    },
+
+                    ".sticky-widget": {
+                      "right": "14px !important"
+                    }
+                  }
+                }
+              }
+            }
+          },
+        }
+      },
+
+      ".monaco-sash.vertical.minimum": {
+        // TODO: Improve collapsing of the sidebar.
+        "left": "calc(var(--activitybar-width) - var(--vscode-sash-size) / 2) !important"
+      },
+
+      ".part.activitybar.left": {
+        ".monaco-action-bar": {
+          ".action-label": {
+            "width": "var(--activitybar-width)"
+          }
+        }
+      },
+
+      "&:not(.fullscreen)": {
+        // Make room for traffic lights.
+        ".part.activitybar.left > .content": {
+          "padding-top": "var(--titlebar-height)"
+        },
+
+        // Move editor title when side-bar is hidden, when side-bar is on the
+        // right or when activity-bar is hidden and side-bar is not on the right
+        "&:has(.sidebar.right)": {
+          ".monaco-split-view2.horizontal .split-view-view:not(.visible) + .split-view-view.visible .editor .title .tabs-and-actions-container": {
+            "padding-left": "var(--activitybar-width)"
+          },
+
+          ".auxiliarybar.left .composite.title": {
+            "padding-left": "var(--activitybar-width)"
+          }
+        },
+
+         // Allow dragging on the activity-bar, status-bar, tabs-container, side-bar title...
+        ".activitybar, .statusbar, .tabs-container, .sidebar .composite.title": {
+          "-webkit-app-region": "drag",
+
+          // ...but still allow to click actions and items without dragging.
+          ".content .monaco-action-bar, .statusbar-item, .tab, .title .title-actions .action-label": {
+            "-webkit-app-region": "no-drag"
+          }
+        }
+      },
+
+      ".statusbar": {
+        // Don't indent the statusbar items.
+        "> .items-container > .statusbar-item.left.first-visible-item": {
+          "padding-left": "0"
+        },
+
+        // Show the host button again, and make it as wide as the .activitybar.
+        "#status\\.host": {
+          "&": {
+            "display": "block !important",
+            "width": "calc(var(--activitybar-width) - 1px)"
+          },
+          ".codicon": {
+            "margin": "0 auto"
+          }
+        }
+      }
+    },
+
+    // Make line numbers a bit smaller.
+    ".editor .margin-view-overlays .line-numbers": {
+      "font-size": "85%"
+    },
+
+    // Show search inputs and results in monospaced font.
+    ".search-widget textarea, .find-widget textarea, .search-view .results .match": {
+      "font-family": "var(--cus-monospace-font) !important"
+    }
+  }
+}
+```
+
+## Replacement History
+
+### Apc Customize UI++
+
+Before `Custom UI Style`, [Apc Customize UI++](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
+was recommended as a replacement, which you could configure to achieve the same
+UI style by adding these settings in your `settings.json` file, see
+[Issue #52](https://github.com/drcika/apc-extension/issues/52):
 
 ```jsonc
 {
@@ -39,10 +203,11 @@ settings in your `settings.json` file, see [#52](https://github.com/drcika/apc-e
 }
 ```
 
-Before `Apc Customize UI++`, [Customize
-UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui) was
-recommended as a replacement, which you could configure to achieve the same UI
-style by adding these settings in your `settings.json` file:
+### Customize UI
+
+Before `Apc Customize UI++`, [Customize UI](https://marketplace.visualstudio.com/items?itemName=iocave.customize-ui)
+was recommended as a replacement, which you could configure to achieve the same
+UI style by adding these settings in your `settings.json` file:
 
 ```jsonc
 {
@@ -59,16 +224,7 @@ style by adding these settings in your `settings.json` file:
 }
 ```
 
-# Titlebar-less VSCode for macOS
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lehni/vscode-titlebar-less-macos/master/resources/preview.png" alt="Preview">
-</p>
-
-An extension to hide the titlebar on VSCode for macOS, and inline the traffic
-lights (= window controls).
-
-## Installation
+## Deprecated Installation Instructions
 
 Follow the instructions in the
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=lehni.vscode-titlebar-less-macos),
