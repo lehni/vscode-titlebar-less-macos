@@ -31,7 +31,7 @@ settings in your `settings.json` file, see [Issue #16](https://github.com/subfra
   },
   "custom-ui-style.stylesheet": {
     ".monaco-workbench": {
-      "--activitybar-width": "78px",
+      "--activitybar-width": "77px",
       "--titlebar-height": "37px",
 
       // Titlebar
