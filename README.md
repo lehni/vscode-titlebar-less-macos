@@ -89,6 +89,19 @@ settings in your `settings.json` file, see [Issue #16](https://github.com/subfra
         }
       },
 
+      // Search-Widget
+      ".search-view .search-widget": {
+        ".replace-container": {
+          "width": "calc(100% - 18px)",
+
+          ".replace-input": {
+            "&, .monaco-findInput": {
+              "width": "100% !important"
+            }
+          }
+        }			
+      },
+
       ".monaco-sash.vertical.minimum": {
         // TODO: Improve collapsing of the sidebar.
         "left": "calc(var(--activitybar-width) - var(--vscode-sash-size) / 2) !important"
